@@ -472,6 +472,41 @@
 
           <hr style="border-color:var(--border);margin:20px 0">
 
+          <h3>🎮 Ejercicios interactivos de prueba</h3>
+          
+          <div class="q">
+            <label><strong>Ejercicio 1: ¿Qué comando comprueba la versión de Python?</strong></label>
+            <textarea id="curso1-q1" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('curso1-q1',['python --version','py --version','python -V','py -V'],'res-curso1-q1')">Comprobar</button>
+            <div id="res-curso1-q1" class="result"></div>
+          </div>
+
+          <div class="q">
+            <label><strong>Ejercicio 2: ¿Qué comando crea un entorno virtual?</strong></label>
+            <textarea id="curso1-q2" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('curso1-q2',['python -m venv venv','py -m venv venv'],'res-curso1-q2')">Comprobar</button>
+            <div id="res-curso1-q2" class="result"></div>
+          </div>
+
+          <div class="q">
+            <label><strong>Ejercicio 3: ¿Qué comando activa el entorno virtual en Windows PowerShell?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-curso1-q3')">venv\Scripts\activate.bat</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-curso1-q3')">venv\Scripts\Activate.ps1</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-curso1-q3')">source venv/bin/activate</button>
+            </div>
+            <div id="res-curso1-q3" class="result"></div>
+          </div>
+
+          <div class="q">
+            <label><strong>Ejercicio 4: ¿Qué comando muestra los paquetes instalados?</strong></label>
+            <input type="text" id="curso1-q4" placeholder="Escribe el comando..." />
+            <button style="margin-top:10px" class="secondary" onclick="checkText('curso1-q4',['pip list'],'res-curso1-q4')">Comprobar</button>
+            <div id="res-curso1-q4" class="result"></div>
+          </div>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
           <div class="complete"><button onclick="completeLesson('curso-desde-cero')">Marcar Lección 1 como completada</button><span id="done-curso-desde-cero" class="mini muted"></span></div>
         </div>
       </div>
