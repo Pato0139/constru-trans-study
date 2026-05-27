@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Zorro - Constru-Trans Study Lab">
+  <!-- Fondo negro circular -->
+  <circle cx="32" cy="32" r="32" fill="#0f0f0f"/>
+
+  <!-- Orejas (parte externa, naranja) -->
+  <polygon points="10,22 18,6 26,22" fill="#ff7a1a"/>
+  <polygon points="54,22 46,6 38,22" fill="#ff7a1a"/>
+
+  <!-- Interior orejas (negro) -->
+  <polygon points="15,21 18,12 21,21" fill="#0f0f0f"/>
+  <polygon points="49,21 46,12 43,21" fill="#0f0f0f"/>
+
+  <!-- Cara (forma de gota invertida) -->
+  <path d="M32 14
+           C18 14, 11 26, 14 38
+           C16 46, 22 52, 32 56
+           C42 52, 48 46, 50 38
+           C53 26, 46 14, 32 14 Z"
+        fill="#ff7a1a"/>
+
+  <!-- Hocico/mejillas blancas -->
+  <path d="M32 28
+           C25 30, 22 38, 25 46
+           C27 50, 29 53, 32 55
+           C35 53, 37 50, 39 46
+           C42 38, 39 30, 32 28 Z"
+        fill="#fafafa"/>
+
+  <!-- Ojos -->
+  <ellipse cx="22" cy="32" rx="3" ry="4" fill="#0f0f0f"/>
+  <ellipse cx="42" cy="32" rx="3" ry="4" fill="#0f0f0f"/>
+
+  <!-- Brillo en los ojos -->
+  <circle cx="23" cy="31" r="1" fill="#ffffff"/>
+  <circle cx="43" cy="31" r="1" fill="#ffffff"/>
+
+  <!-- Nariz -->
+  <path d="M29.5 41 L34.5 41 L32 45 Z" fill="#0f0f0f"/>
+
+  <!-- Boca -->
+  <path d="M32 45 Q28 49, 26 47" stroke="#0f0f0f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M32 45 Q36 49, 38 47" stroke="#0f0f0f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</svg>
