@@ -286,3 +286,7 @@ textarea:focus,input[type=text]:focus{
   margin:0 0 10px 0;
   color:var(--fox-orange);
 }
+.cursolesson .card{
+  max-width:none;
+  width:100%;
+}

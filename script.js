@@ -320,6 +320,134 @@ const quizFeedback = {
     explicacion: 'El modelo financiero principal es Factura.',
     pista: 'Busca el modelo que maneja subtotal, IVA, total y estado de pago.',
     codigo: 'class Factura(models.Model):\n    pedido = models.OneToOneField(\'ordenes.Pedido\', ...)\n    cliente = models.ForeignKey(\'usuarios.Usuario\', ...)\n    subtotal = models.DecimalField(...)\n    iva = models.DecimalField(...)\n    total = models.DecimalField(...)\n    estado = models.CharField(...)'
+  },
+  'zona7-q1': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 1: Estados del Pedido',
+    fragmento: 'pendiente, en_ruta, entregado, cancelado',
+    explicacion: 'Los 4 estados posibles de un pedido son pendiente, en_ruta, entregado y cancelado.',
+    pista: 'Mira el código: ESTADOS = [...]',
+    codigo: "ESTADOS = [\n        ('pendiente', 'Pendiente'),\n        ('en_ruta', 'En Ruta'),\n        ('entregado', 'Entregado'),\n        ('cancelado', 'Cancelado'),\n    ]"
+  },
+  'res-zona7-q1': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 1: Estados del Pedido',
+    fragmento: 'pendiente, en_ruta, entregado, cancelado',
+    explicacion: 'Los 4 estados posibles de un pedido son pendiente, en_ruta, entregado y cancelado.',
+    pista: 'Mira el código: ESTADOS = [...]',
+    codigo: "ESTADOS = [\n        ('pendiente', 'Pendiente'),\n        ('en_ruta', 'En Ruta'),\n        ('entregado', 'Entregado'),\n        ('cancelado', 'Cancelado'),\n    ]"
+  },
+  'zona7-q2': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 2: Subtotal',
+    fragmento: 'cantidad * precio_unitario',
+    explicacion: 'El subtotal de un DetallePedido se calcula multiplicando la cantidad por el precio unitario.',
+    pista: 'Mira el @property subtotal',
+    codigo: '@property\ndef subtotal(self):\n    return self.cantidad * self.precio_unitario'
+  },
+  'res-zona7-q2': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 2: Subtotal',
+    fragmento: 'cantidad * precio_unitario',
+    explicacion: 'El subtotal de un DetallePedido se calcula multiplicando la cantidad por el precio unitario.',
+    pista: 'Mira el @property subtotal',
+    codigo: '@property\ndef subtotal(self):\n    return self.cantidad * self.precio_unitario'
+  },
+  'zona7-q3': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 3: F() expressions',
+    fragmento: 'F',
+    explicacion: 'La función F() se usa para evitar race conditions al modificar el stock directamente en la base de datos.',
+    pista: 'Mira el código: F("cantidad_actual")',
+    codigo: 'stock_obj.cantidad_actual = F(\'cantidad_actual\') - cantidad'
+  },
+  'res-zona7-q3': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 3: F() expressions',
+    fragmento: 'F',
+    explicacion: 'La función F() se usa para evitar race conditions al modificar el stock directamente en la base de datos.',
+    pista: 'Mira el código: F("cantidad_actual")',
+    codigo: 'stock_obj.cantidad_actual = F(\'cantidad_actual\') - cantidad'
+  },
+  'zona8-q1': {
+    section: 'Zona 8 — Épica 4: Transporte',
+    subapartado: 'Ejercicio 1: Placa única',
+    fragmento: 'placa',
+    explicacion: 'El campo único del Vehiculo es la placa.',
+    pista: 'Mira el código: placa = models.CharField(..., unique=True)',
+    codigo: 'placa = models.CharField(max_length=10, unique=True)'
+  },
+  'res-zona8-q1': {
+    section: 'Zona 8 — Épica 4: Transporte',
+    subapartado: 'Ejercicio 1: Placa única',
+    fragmento: 'placa',
+    explicacion: 'El campo único del Vehiculo es la placa.',
+    pista: 'Mira el código: placa = models.CharField(..., unique=True)',
+    codigo: 'placa = models.CharField(max_length=10, unique=True)'
+  },
+  'res-zona8-q2': {
+    section: 'Zona 8 — Épica 4: Transporte',
+    subapartado: 'Ejercicio 2: Relación N:M',
+    fragmento: 'N:M (tabla puente)',
+    explicacion: 'La relación entre Conductor y Vehiculo es muchos a muchos, con la tabla puente ConductorVehiculo.',
+    pista: 'Mira el modelo ConductorVehiculo',
+    codigo: 'class ConductorVehiculo(models.Model):\n    conductor = models.ForeignKey(Conductor, ...)\n    vehiculo = models.ForeignKey(Vehiculo, ...)'
+  },
+  'zona9-q1': {
+    section: 'Zona 9 — Épica 5: Proveedores y Compras',
+    subapartado: 'Ejercicio 1: PK de Proveedor',
+    fragmento: 'nit',
+    explicacion: 'La clave primaria de Proveedor es el NIT.',
+    pista: 'Mira el código: nit = models.CharField(..., primary_key=True)',
+    codigo: 'nit = models.CharField(max_length=50, primary_key=True)'
+  },
+  'res-zona9-q1': {
+    section: 'Zona 9 — Épica 5: Proveedores y Compras',
+    subapartado: 'Ejercicio 1: PK de Proveedor',
+    fragmento: 'nit',
+    explicacion: 'La clave primaria de Proveedor es el NIT.',
+    pista: 'Mira el código: nit = models.CharField(..., primary_key=True)',
+    codigo: 'nit = models.CharField(max_length=50, primary_key=True)'
+  },
+  'zona9-q2': {
+    section: 'Zona 9 — Épica 5: Proveedores y Compras',
+    subapartado: 'Ejercicio 2: Calcular total',
+    fragmento: 'calcular_total',
+    explicacion: 'El método que calcula el total de una Compra es calcular_total().',
+    pista: 'Mira el método def calcular_total(self):',
+    codigo: 'def calcular_total(self):\n    self.total_compra = sum(d.subtotal for d in self.detalles.all())\n    self.save()\n    return self.total_compra'
+  },
+  'res-zona9-q2': {
+    section: 'Zona 9 — Épica 5: Proveedores y Compras',
+    subapartado: 'Ejercicio 2: Calcular total',
+    fragmento: 'calcular_total',
+    explicacion: 'El método que calcula el total de una Compra es calcular_total().',
+    pista: 'Mira el método def calcular_total(self):',
+    codigo: 'def calcular_total(self):\n    self.total_compra = sum(d.subtotal for d in self.detalles.all())\n    self.save()\n    return self.total_compra'
+  },
+  'res-zona11-q1': {
+    section: 'Zona 11 — Épica 7: Reportes e Historial',
+    subapartado: 'Ejercicio 1: Acciones del Historial',
+    fragmento: 'crear, editar, eliminar, login',
+    explicacion: 'Algunas de las acciones que registra el Historial son crear, editar, eliminar, login y logout.',
+    pista: 'Mira el código: ACCIONES = [...]',
+    codigo: 'ACCIONES = [\n        (\'crear\', \'Crear\'),\n        (\'editar\', \'Editar\'),\n        (\'eliminar\', \'Eliminar\'),\n        (\'login\', \'Inicio de sesión\'),\n        (\'logout\', \'Cierre de sesión\'),\n        (\'otro\', \'Otro\'),\n    ]'
+  },
+  'zona11-q2': {
+    section: 'Zona 11 — Épica 7: Reportes e Historial',
+    subapartado: 'Ejercicio 2: Tipos de Reporte',
+    fragmento: 'inventario, ventas, compras, entregas, financiero',
+    explicacion: 'Los tipos de reporte son inventario, ventas, compras, entregas y financiero.',
+    pista: 'Mira el código: TIPOS = [...]',
+    codigo: "TIPOS = [\n        ('inventario', 'Inventario'),\n        ('ventas', 'Ventas'),\n        ('compras', 'Compras'),\n        ('entregas', 'Entregas'),\n        ('financiero', 'Financiero'),\n    ]"
+  },
+  'res-zona11-q2': {
+    section: 'Zona 11 — Épica 7: Reportes e Historial',
+    subapartado: 'Ejercicio 2: Tipos de Reporte',
+    fragmento: 'inventario, ventas, compras, entregas, financiero',
+    explicacion: 'Los tipos de reporte son inventario, ventas, compras, entregas y financiero.',
+    pista: 'Mira el código: TIPOS = [...]',
+    codigo: "TIPOS = [\n        ('inventario', 'Inventario'),\n        ('ventas', 'Ventas'),\n        ('compras', 'Compras'),\n        ('entregas', 'Entregas'),\n        ('financiero', 'Financiero'),\n    ]"
   }
 };
 
