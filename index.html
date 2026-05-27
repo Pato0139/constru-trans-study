@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constru-Trans Study Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">Constru-Trans Study Lab</div>
+    <div class="sub">Proyecto personal para aprender tu propio código.</div>
+    <div class="pill">Basado en tu repositorio real</div>
+    <nav class="nav" id="nav">
+      <a href="#inicio" class="active">Inicio</a>
+      <a href="#guia-vscode">👨‍💻 Guía Paso a Paso en VS Code</a>
+      <a href="#zona-0">🗺️ Zona 0: Bienvenida</a>
+      <a href="#curso-desde-cero">📚 Zona 1: Base desde Cero</a>
+      <a href="#arquitectura">🏗️ Zona 2: Django y Arquitectura</a>
+      <a href="#zona-3">⚙️ Zona 3: Setup Real</a>
+      <a href="#zona-4">📊 Zona 4: MER Completo</a>
+      <a href="#epica1">👤 Zona 5: Épica 1 — Usuarios y Clientes</a>
+      <a href="#zona-6">📦 Zona 6: Épica 2 — Materiales e Inventario</a>
+      <a href="#zona-7">📋 Zona 7: Épica 3 — Pedidos</a>
+      <a href="#zona-8">🚚 Zona 8: Épica 4 — Transporte</a>
+      <a href="#zona-9">🛒 Zona 9: Épica 5 — Proveedores y Compras</a>
+      <a href="#epica6">🧾 Zona 10: Épica 6 — Facturación y Pagos</a>
+      <a href="#zona-11">📈 Zona 11: Épica 7 — Reportes e Historial</a>
+      <a href="#flujo">🔄 Zona 12: Flujos End-to-End</a>
+      <a href="#zona-13">📖 Zona 13: Leer Código Real</a>
+      <a href="#zona-14">🎤 Zona 14: Modo Defensa</a>
+      <a href="#zona-15">📚 Zona 15: Glosario</a>
+      <a href="#retos">Retos prácticos</a>
+      <a href="#fuentes">Fuentes</a>
+    </nav>
+    <div class="progress">
+      <div class="mini">Progreso de estudio</div>
+      <div class="bar"><div id="barFill"></div></div>
+      <div class="mini" id="progressText" style="margin-top:8px">0 / 6 lecciones completadas</div>
+    </div>
+  </aside>
+  <main class="main">
+    <section id="inicio" class="section active">
+      <div class="hero">
+        <h1>Aprende <em>solo</em> tu proyecto</h1>
+        <p>Este mini proyecto está construido con código real de <a href="https://github.com/Pato0139/Constru-trans_01.git" target="_blank" rel="noreferrer">Constru-trans_01</a>. Cada lección te explica una parte del sistema y debajo tienes fragmentos del mismo código, además de ejercicios tipo completar y preguntas rápidas.</p>
+        <div class="grid">
+          <div class="card"><h3>Qué vas a estudiar</h3><p class="muted">Arquitectura general, rutas, autenticación, perfiles, clientes, pedidos, facturas y pagos.</p></div>
+          <div class="card"><h3>Cómo usarlo</h3><p class="muted">Lee la explicación, revisa el código, responde el reto y marca la lección como completada.</p></div>
+          <div class="card"><h3>Regla</h3><p class="muted">Todo está adaptado al código real del repo. No es un tutorial genérico.</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Mapa rápido del proyecto</h3>
+        <ul>
+          <li><span class="badge">core/urls.py</span> conecta todas las apps.</li>
+          <li><span class="badge">apps/usuarios</span> maneja login, registro, paneles, perfiles y recuperación.</li>
+          <li><span class="badge">apps/clientes</span> extiende al usuario cliente y permite crear pedidos.</li>
+          <li><span class="badge">apps/ordenes</span> define Pedido, DetallePedido y Entrega.</li>
+          <li><span class="badge">apps/facturacion</span> define Factura y vistas de pago/anulación.</li>
+          <li><span class="badge">apps/pagos</span> registra pagos y actualiza el estado de la factura.</li>
+        </ul>
+        <div class="complete"><button onclick="completeLesson('inicio')">Marcar como completada</button><span id="done-inicio" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="guia-vscode" class="section">
+      <div class="hero">
+        <h1>👨‍💻 Guía Paso a Paso en VS Code — desde Cero</h1>
+        <p>Guía ultra detallada para hacer TODO en Visual Studio Code, paso a paso, sin saltarte nada.</p>
+      </div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: Abrir VS Code y crear una carpeta</h2>
+          <h3>Objetivo</h3>
+          <p>Tener una carpeta vacía lista para tu proyecto.</p>
+          <h3>Lo que tienes que hacer:</h3>
+          <ol>
+            <li>Abre Visual Studio Code (busca "Visual Studio Code" en el menú Inicio de Windows)</li>
+            <li>Ve a la barra de menú superior → <strong>Archivo → Abrir carpeta...</strong></li>
+            <li>Se abrirá el Explorador de archivos. Navega a donde quieras guardar tu proyecto (ej: Escritorio)</li>
+            <li><strong>Crea una nueva carpeta</strong> (botón derecho → Nuevo → Carpeta) y llámala: <code>MiProyectoDjango</code></li>
+            <li>Selecciona la carpeta <code>MiProyectoDjango</code> y haz clic en <strong>"Seleccionar carpeta"</strong></li>
+          </ol>
+          <p>✅ Ahora en la barra lateral izquierda de VS Code verás la carpeta <code>MiProyectoDjango</code> (vacía por ahora).</p>
+        </div>
+        <div class="practice">
+          <h2>✅ ¡Ya tienes tu carpeta lista!</h2>
+          <p class="muted">Cuando termines este paso, pasa al siguiente.</p>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 2: Abrir la terminal de VS Code</h2>
+          <h3>Objetivo</h3>
+          <p>Abrir la terminal integrada dentro de VS Code (no necesitas abrir PowerShell por separado).</p>
+          <h3>Lo que tienes que hacer:</h3>
+          <ol>
+            <li>En VS Code, ve a la barra de menú superior → <strong>Terminal → Nueva terminal</strong></li>
+            <li>Se abrirá un panel en la parte inferior de VS Code: esa es la terminal!</li>
+            <li>Verás algo como: <code>PS C:\Users\TU_USUARIO\Desktop\MiProyectoDjango></code></li>
+          </ol>
+          <p>✅ ¡Listo! Ya tienes la terminal abierta en la carpeta correcta.</p>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 2: Verifica tu terminal</h2>
+          <div class="vs-code-box">
+            <h4>👀 Comprueba esto:</h4>
+            <p>En la terminal, debe aparecer la ruta de tu carpeta <code>MiProyectoDjango</code>. Si es así, ¡perfecto!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 3: Crear el entorno virtual</h2>
+          <h3>Objetivo</h3>
+          <p>Crear un entorno virtual aislado para tu proyecto.</p>
+          <h3>Lo que tienes que hacer en la terminal:</h3>
+          <p>Escribe este comando y presiona Enter:</p>
+          <div class="codebox">py -m venv venv</div>
+          <p>Si no funciona, prueba con:</p>
+          <div class="codebox">python -m venv venv</div>
+          <p>⏳ Espera un par de segundos (no aparece nada, pero está trabajando).</p>
+          <p>✅ Cuando termine, en la barra lateral izquierda verás una nueva carpeta llamada <code>venv</code>.</p>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 3: Crea el entorno virtual</h2>
+          <div class="q">
+            <label><strong>Escribe el comando para crear un entorno virtual:</strong></label>
+            <textarea id="vscode-q1" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('vscode-q1','py -m venv venv','¡Genial! También vale python -m venv venv.','Mira el comando en la sección “Lo que tienes que hacer”')">Comprobar</button>
+            <div id="res-vscode-q1" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 4: Activar el entorno virtual</h2>
+          <h3>Objetivo</h3>
+          <p>Activar el entorno virtual para usar sus paquetes.</p>
+          <h3>Lo que tienes que hacer en la terminal:</h3>
+          <p>Escribe este comando y presiona Enter:</p>
+          <div class="codebox">venv\Scripts\Activate.ps1</div>
+          <p>✅ Cuando funcione, verás <code>(venv)</code> al principio de la línea en la terminal, así:</p>
+          <div class="codebox">(venv) PS C:\Users\TU_USUARIO\Desktop\MiProyectoDjango></div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 4: Activa el entorno virtual</h2>
+          <div class="vs-code-box">
+            <h4>👨‍💻 En VS Code:</h4>
+            <ol>
+              <li>Escribe: <code>venv\Scripts\Activate.ps1</code></li>
+              <li>Presiona Enter</li>
+              <li>Verifica que aparezca <code>(venv)</code> al principio</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 5: Instalar Django</h2>
+          <h3>Objetivo</h3>
+          <p>Instalar Django en tu entorno virtual.</p>
+          <h3>Lo que tienes que hacer en la terminal (con (venv) activado):</h3>
+          <div class="codebox">pip install django</div>
+          <p>⏳ Espera a que termine de instalar (verás muchos mensajes). Al final dirá "Successfully installed django-...".</p>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 5: Instala Django</h2>
+          <p class="muted">Cuando termine la instalación, pasa al siguiente paso.</p>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 6: Opcional — Crear el proyecto Django (o usa el tuyo)</h2>
+          <h3>Si ya tienes un proyecto (como tu repo Constru-trans_01):</h3>
+          <p>¡Salta este paso! Tu proyecto ya tiene la carpeta <code>core/</code> y <code>manage.py</code>. Sigue directamente al Paso 7.</p>
+          
+          <h3>Si quieres CREAR UN PROYECTO NUEVO desde cero:</h3>
+          <p>Escribe este comando (con el punto <code>.</code> al final):</p>
+          <div class="codebox">django-admin startproject core .</div>
+          <p>⚠️ <strong>El punto . es importante!</strong> Significa "crear el proyecto en la carpeta actual".</p>
+          <p>✅ Cuando termine, verás:</p>
+          <ul class="muted">
+            <li><code>venv/</code></li>
+            <li><code>core/</code> (la carpeta del proyecto)</li>
+            <li><code>manage.py</code></li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 6: Opcional</h2>
+          <p class="muted">Si tienes tu propio proyecto, ¡sigue al Paso 7!</p>
+          <div class="q">
+            <label><strong>(Opcional) Escribe el comando para crear un proyecto nuevo:</strong></label>
+            <textarea id="vscode-q2" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('vscode-q2','django-admin startproject core .','¡PERFECTO!','Recuerda: django-admin startproject core .')">Comprobar</button>
+            <div id="res-vscode-q2" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 7: ¡Levantar el servidor para ver que funciona!</h2>
+          <h3>Objetivo</h3>
+          <p>Iniciar el servidor de desarrollo de Django y ver la página de bienvenida.</p>
+          <h3>Lo que tienes que hacer:</h3>
+          <div class="codebox">python manage.py runserver</div>
+          <p>Si no funciona, prueba con:</p>
+          <div class="codebox">py manage.py runserver</div>
+          <p>✅ Verás algo como:</p>
+          <div class="codebox">Starting development server at http://127.0.0.1:8000/</div>
+          <p>Ahora abre tu navegador y visita: <strong>http://127.0.0.1:8000/</strong></p>
+          <p>🎉 ¡Verás la página de bienvenida de Django! 🚀</p>
+        </div>
+        <div class="practice">
+          <h2>¡Felicidades! Tienes tu proyecto Django con core funcionando!</h2>
+          <div class="complete"><button onclick="completeLesson('guia-vscode')">Marcar Guía VS Code como completada</button><span id="done-guia-vscode" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zona-0" class="section">
+      <div class="hero">
+        <h1>🗺️ Zona 0 — Bienvenida y Mapa del Proyecto</h1>
+        <p>Aquí aprenderás qué es Constru-Trans, qué problema resuelve, su arquitectura única y cómo se organizará tu estudio.</p>
+      </div>
+
+      <div class="card">
+        <h2>1. ¿Qué es Constru-Trans?</h2>
+        <p><strong>Constru-Trans</strong> es un sistema integral de gestión para transporte y materiales de construcción. Combina gestión de inventario, pedidos, facturación, pagos, transportistas y reportes en una sola plataforma.</p>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>2. ¿Qué problema de negocio resuelve?</h2>
+        <ul>
+          <li>✅ Gestionar materiales de construcción y su stock</li>
+          <li>✅ Controlar pedidos de clientes</li>
+          <li>✅ Facturar y registrar pagos (parciales o totales)</li>
+          <li>✅ Gestionar transportistas y vehículos</li>
+          <li>✅ Generar reportes en PDF, Excel y XML</li>
+          <li>✅ Trabajar <strong>offline</strong> sin internet</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>3. Arquitectura híbrida Offline-First ⭐</h2>
+        <p>Este es el punto clave único del proyecto:</p>
+        <div class="grid">
+          <div class="card">
+            <h3>📦 BD Local: SQLite</h3>
+            <p class="muted">Archivo <code>db.sqlite3</code> en cada PC. Funciona sin internet.</p>
+            <ul class="muted">
+              <li>Trabajas normalmente sin conexión</li>
+              <li>Todos los datos están en tu PC</li>
+              <li>No depende de la nube para funcionar</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>☁️ BD Remota: Neon PostgreSQL</h3>
+            <p class="muted">Base de datos central en la nube. Sincroniza usuarios, sesiones y historial entre compañeros.</p>
+            <ul class="muted">
+              <li>Compartir datos entre el equipo</li>
+              <li>Centralizar credenciales de login</li>
+              <li>Historial común para todos</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:16px"><strong>Router de BD:</strong> El archivo <code>core/routers.py</code> decide automáticamente qué base de datos usar (local o remota) según la operación. ¡Genial!</p>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>4. Mapa de Apps del Proyecto</h2>
+        <p>El proyecto está organizado en apps Django independientes:</p>
+        <div class="grid">
+          <div class="card"><h3>👤 usuarios</h3><p class="muted">Autenticación, perfiles, roles (admin/cliente/conductor/empleado)</p></div>
+          <div class="card"><h3>🏪 clientes</h3><p class="muted">Perfiles de clientes y gestión de sus pedidos</p></div>
+          <div class="card"><h3>📦 inventario</h3><p class="muted">Materiales, stock y movimientos de inventario</p></div>
+          <div class="card"><h3>🛒 compras</h3><p class="muted">Proveedores y órdenes de compra</p></div>
+          <div class="card"><h3>📋 ordenes</h3><p class="muted">Pedidos de clientes y detalles</p></div>
+          <div class="card"><h3>🚚 transporte</h3><p class="muted">Vehículos, conductores y entregas</p></div>
+          <div class="card"><h3>🧾 facturacion</h3><p class="muted">Facturas ligadas a pedidos</p></div>
+          <div class="card"><h3>💳 pagos</h3><p class="muted">Registro de pagos parciales/totales</p></div>
+          <div class="card"><h3>📊 reportes</h3><p class="muted">Generación de PDF, Excel y XML</p></div>
+          <div class="card"><h3>📜 historial</h3><p class="muted">Auditoría de acciones del sistema</p></div>
+          <div class="card"><h3>🏠 inicio</h3><p class="muted">Página de inicio del sistema</p></div>
+          <div class="card"><h3>🔑 licensing</h3><p class="muted">Gestión de licencias del software</p></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>5. Mapa de Épicas del Proyecto</h2>
+        <ol>
+          <li><strong>Épica 1:</strong> Acceso, Usuarios y Clientes (Edward)</li>
+          <li><strong>Épica 2:</strong> Gestión de Materiales e Inventario (Iván Tai)</li>
+          <li><strong>Épica 3:</strong> Gestión de Pedidos (Juanes)</li>
+          <li><strong>Épica 4:</strong> Gestión de Entregas y Transporte (Michel)</li>
+          <li><strong>Épica 5:</strong> Gestión de Proveedores y Compra (RR)</li>
+          <li><strong>Épica 6:</strong> Facturación y Pagos (Edward)</li>
+          <li><strong>Épica 7:</strong> Reportes e Historial (RR)</li>
+        </ol>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>6. ¿Cómo usar esta Study Web?</h2>
+        <p>Sigue este orden para aprender de forma progresiva:</p>
+        <ol>
+          <li>📚 Empieza por <strong>Curso desde Cero</strong> si no sabes nada de Python/Django</li>
+          <li>🗺️ Revisa la <strong>Zona 0</strong> para entender el proyecto</li>
+          <li>🏗️ Luego explora la <strong>Arquitectura</strong></li>
+          <li>📋 Después pasa a las <strong>Épicas</strong> una por una</li>
+          <li>🔄 Finaliza con <strong>Flujo completo</strong> y <strong>Retos</strong></li>
+        </ol>
+      </div>
+
+      <div class="complete"><button onclick="completeLesson('zona-0')">Marcar Zona 0 como completada</button><span id="done-zona-0" class="mini muted"></span></div>
+    </section>
+
+    <section id="curso-desde-cero" class="section">
+      <div class="lesson-nav">
+        <button onclick="showCurso('curso-1')">1. Python y Entorno</button>
+        <button onclick="showCurso('curso-2')">2. Git y Repositorio</button>
+        <button onclick="showCurso('curso-3')">3. Django Básico</button>
+      </div>
+
+      <div id="curso-1" class="cursolesson">
+        <div class="card">
+          <h2>📚 Lección 1: Instalar Python, Terminal y Entorno Virtual</h2>
+          <h3>🎯 Qué vas a aprender hoy</h3>
+          <ol>
+            <li>Qué es Python y para qué sirve</li>
+            <li>Cómo instalar Python en Windows</li>
+            <li>Cómo comprobar que está bien instalado</li>
+            <li>Qué es la terminal (PowerShell)</li>
+            <li>Cómo crear y usar un entorno virtual</li>
+            <li>Qué es pip</li>
+          </ol>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>1. ¿Qué es Python?</h3>
+          <p>Python es un <strong>lenguaje de programación</strong> — es decir, un conjunto de reglas para decirle al ordenador qué hacer. Se usa para muchísimas cosas: páginas web (como tu proyecto Django), análisis de datos, juegos, automatización, etc.</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>2. Instalar Python en Windows (paso a paso)</h3>
+          <p>Vamos a instalar Python 3.11 o superior (como requiere tu repositorio).</p>
+          <h4>Paso 1: Descargar Python</h4>
+          <ol>
+            <li>Abre tu navegador y ve a: <a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">python.org/downloads/</a></li>
+            <li>Haz clic en el botón grande <strong>"Download Python 3.xx.x"</strong> (la versión que aparezca, será la última estable)</li>
+          </ol>
+          <h4>Paso 2: Instalar Python</h4>
+          <p>IMPORTANTE: <strong>Marca la casilla "Add Python 3.xx to PATH"</strong> antes de hacer clic en "Install Now"! Esto hará que Python se pueda usar desde la terminal.</p>
+          <ol>
+            <li>Haz clic en <strong>Install Now</strong></li>
+            <li>Espera a que termine la instalación</li>
+            <li>Cierra la ventana</li>
+          </ol>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>3. Comprobar que Python está instalado</h3>
+          <h4>¿Qué es la terminal?</h4>
+          <p>Es una ventana donde escribes comandos para controlar el ordenador. En Windows usaremos <strong>PowerShell</strong>.</p>
+          <h4>Abrir PowerShell</h4>
+          <ol>
+            <li>Presiona la tecla <strong>Windows</strong> en tu teclado</li>
+            <li>Escribe: <code>PowerShell</code></li>
+            <li>Haz clic en "Windows PowerShell" para abrirlo</li>
+          </ol>
+          <h4>Escribir tu primer comando</h4>
+          <p>En PowerShell, escribe esto y presiona <strong>Enter</strong>:</p>
+          <div class="codebox">python --version</div>
+          <p>Si no funciona, prueba con:</p>
+          <div class="codebox">py --version</div>
+          <p>✅ <strong>Si sale algo como:</strong> <code>Python 3.11.4</code> (o cualquier número superior a 3.11), ¡está perfecto!</p>
+          <p>❌ <strong>Error común:</strong> Si sale "python no se reconoce", es que olvidaste marcar la casilla "Add Python to PATH". Para solucionarlo, vuelve a ejecutar el instalador y elige "Modify" o "Repair", y asegúrate de marcar esa casilla.</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>4. Crear tu primera carpeta de trabajo</h3>
+          <p>Antes de seguir, creemos una carpeta para organizar nuestros proyectos.</p>
+          <ol>
+            <li>En el Explorador de archivos, crea una carpeta llamada <code>ProyectosDjango</code> en <strong>C:\Users\TU_USUARIO\ProyectosDjango</strong> (tu carpeta de usuario, cambia TU_USUARIO por tu nombre real)</li>
+            <li>Ahora, en PowerShell, navega a esa carpeta con este comando:</li>
+          </ol>
+          <div class="codebox">cd C:\Users\TU_USUARIO\ProyectosDjango</div>
+          <p>(Nota: "cd" significa "change directory" — cambiar directorio. Recuerda cambiar TU_USUARIO por tu nombre de usuario de Windows.)</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>5. ¿Qué es un entorno virtual?</h3>
+          <p>Imagina que tienes dos proyectos:</p>
+          <ul>
+            <li>Proyecto A necesita Django 4.2</li>
+            <li>Proyecto B necesita Django 5.0</li>
+          </ul>
+          <p>Si instalas Django en tu ordenador "a secas", ambos proyectos usarán la misma versión y habrá conflictos.</p>
+          <p>Un <strong>entorno virtual</strong> es como una "caja separada" para cada proyecto, con sus propias versiones de Python y paquetes. ¡Nunca hay conflictos!</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>6. Crear y activar un entorno virtual</h3>
+          <p>En PowerShell, dentro de la carpeta <code>C:\Users\edwar\ProyectosDjango</code>, escribe:</p>
+          <h4>Paso 1: Crear el entorno virtual</h4>
+          <div class="codebox">python -m venv venv</div>
+          <p>O si no funciona con <code>python</code>:</p>
+          <div class="codebox">py -m venv venv</div>
+          <p>Esto creará una carpeta llamada <code>venv</code> con todo lo necesario para el entorno virtual.</p>
+          <h4>Paso 2: Activar el entorno virtual</h4>
+          <p><strong>En PowerShell (Windows):</strong></p>
+          <div class="codebox">venv\Scripts\Activate.ps1</div>
+          <p>Si tienes un error de política de ejecución:</p>
+          <ol>
+            <li>Abre PowerShell <strong>como Administrador</strong> (clic derecho en PowerShell → "Ejecutar como administrador")</li>
+            <li>Escribe: <code>Set-ExecutionPolicy RemoteSigned</code> y presiona Enter</li>
+            <li>Escribe <code>S</code> y presiona Enter</li>
+            <li>Cierra PowerShell y ábrelo normal (no como administrador)</li>
+            <li>Vuelve a intentar activar el entorno virtual: <code>venv\Scripts\Activate.ps1</code></li>
+          </ol>
+          <p>✅ Cuando el entorno está activado, verás <code>(venv)</code> al principio de la línea en PowerShell:</p>
+          <div class="codebox">(venv) PS C:\Users\TU_USUARIO\ProyectosDjango></div>
+          <h4>Paso 3: Desactivar el entorno virtual (si quieres)</h4>
+          <p>Si quieres salir del entorno virtual, escribe:</p>
+          <div class="codebox">deactivate</div>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>7. ¿Qué es pip?</h3>
+          <p><code>pip</code> es el <strong>gestor de paquetes de Python</strong>. Es decir, la herramienta que usamos para instalar librerías (como Django, que usaremos después).</p>
+          <h4>Ver pip y paquetes instalados</h4>
+          <p>Con el entorno virtual activado, escribe:</p>
+          <div class="codebox">pip list</div>
+          <p>Te mostrará los paquetes que hay en tu entorno virtual (por defecto, solo unos pocos básicos como <code>pip</code> y <code>setuptools</code>).</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>🧠 Qué debes memorizar hoy</h3>
+          <ul>
+            <li><code>python --version</code> o <code>py --version</code>: Comprueba la versión de Python</li>
+            <li><code>cd</code>: Cambia de directorio</li>
+            <li><code>python -m venv venv</code>: Crea un entorno virtual</li>
+            <li><code>venv\Scripts\Activate.ps1</code>: Activa el entorno virtual en PowerShell</li>
+            <li><code>deactivate</code>: Desactiva el entorno virtual</li>
+            <li><code>pip list</code>: Muestra los paquetes instalados</li>
+          </ul>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>❌ Error común</h3>
+          <p>Olvidaste activar el entorno virtual: Siempre verifica que aparezca <code>(venv)</code> antes de instalar paquetes o ejecutar código.</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>📝 Ejercicio corto</h3>
+          <ol>
+            <li>Abre PowerShell</li>
+            <li>Navega a la carpeta <code>C:\Users\edwar\ProyectosDjango</code></li>
+            <li>Crea un entorno virtual llamado <code>venv</code></li>
+            <li>Activa el entorno virtual</li>
+            <li>Verifica que se vea <code>(venv)</code> al principio de la línea</li>
+            <li>Escribe <code>pip list</code> y mira los paquetes instalados</li>
+          </ol>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <div class="complete"><button onclick="completeLesson('curso-desde-cero')">Marcar Lección 1 como completada</button><span id="done-curso-desde-cero" class="mini muted"></span></div>
+        </div>
+      </div>
+
+      <div id="curso-2" class="cursolesson" style="display:none">
+        <div class="card">
+          <h2>📚 Lección 2: Git y Repositorio (próximamente)</h2>
+          <p>Aquí aprenderás qué es Git, cómo clonar tu repositorio y cómo abrirlo en VS Code.</p>
+        </div>
+      </div>
+
+      <div id="curso-3" class="cursolesson" style="display:none">
+        <div class="card">
+          <h2>📚 Lección 3: Django Básico — Cómo crear un proyecto y la carpeta core</h2>
+          <h3>🎯 Qué vas a aprender</h3>
+          <ul>
+            <li>Cómo crear un proyecto Django desde cero</li>
+            <li>Qué es la carpeta <code>core</code> (o el nombre del proyecto)</li>
+            <li>Cómo se estructura un proyecto Django</li>
+            <li>Relación con tu repositorio real</li>
+          </ul>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>1. Instalar Django</h3>
+          <p>Primero, con el entorno virtual activado, instala Django:</p>
+          <div class="codebox">pip install django</div>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>2. Crear un proyecto Django</h3>
+          <p>Para crear un proyecto Django, usa el comando:</p>
+          <div class="codebox">django-admin startproject nombre_del_proyecto</div>
+          <p>En tu repositorio real, el proyecto se llama <strong>Constru-trans</strong>, y la carpeta principal se llama <code>core</code>. Esto se hace así:</p>
+          <div class="codebox">django-admin startproject core .</div>
+          <p>⚠️ El punto <code>.</code> al final es importante! Significa "crear el proyecto en la carpeta actual", sin crear una subcarpeta extra.</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>3. ¿Qué archivos se crean?</h3>
+          <p>Después de ejecutar el comando, tendrás esta estructura:</p>
+          <div class="codebox">tu_carpeta/
+├── manage.py          # Archivo de gestión (para runserver, migrate, etc.)
+└── core/              # Carpeta del proyecto (tú puedes cambiarle el nombre)
+    ├── __init__.py    # Indica que esta carpeta es un paquete Python
+    ├── settings.py    # Configuración del proyecto
+    ├── urls.py        # Rutas principales
+    └── wsgi.py        # Para部署 (deployment) — no lo usas mucho en desarrollo</div>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>4. Relación con tu repositorio real</h3>
+          <p>En tu repo <strong>Constru-trans_01</strong>, la estructura es:</p>
+          <div class="codebox">Constru-trans_01/
+├── manage.py
+├── core/              # Carpeta del proyecto
+│   ├── settings/      # ⭐ Configuración modular (base/dev/prod)
+│   ├── urls.py        # Rutas principales
+│   └── routers.py     # Router de BD (local vs remoto)
+└── apps/              # Todas las apps del proyecto
+    ├── usuarios/
+    ├── clientes/
+    ├── ordenes/
+    └── ...</div>
+          <p><strong>Diferencia clave:</strong> Tu repo tiene una carpeta <code>core/settings/</code> modular (con archivos separados para base, desarrollo y producción), en lugar de un solo <code>settings.py</code>. Esto es una buena práctica para proyectos grandes.</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>5. Archivos clave en core/</h3>
+          <ul>
+            <li><code>core/urls.py</code>: Rutas principales del proyecto (incluye todas las apps)</li>
+            <li><code>core/settings/</code>: Configuración (base de datos, apps instaladas, etc.)</li>
+            <li><code>core/routers.py</code>: Router de BD (decide si usa SQLite local o PostgreSQL remoto)</li>
+          </ul>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>🧠 Qué debes memorizar</h3>
+          <ul>
+            <li><code>django-admin startproject core .</code>: Crea un proyecto Django en la carpeta actual, con la carpeta del proyecto llamada <code>core</code></li>
+            <li><code>manage.py</code>: Archivo para ejecutar comandos (runserver, migrate, createsuperuser)</li>
+            <li>La carpeta <code>core/</code> contiene la configuración del proyecto</li>
+          </ul>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>❌ Error común</h3>
+          <p>Olvidar el punto <code>.</code> al final del comando: <code>django-admin startproject core</code> (sin punto) crea una carpeta extra. ¡Siempre usa el punto!</p>
+
+          <hr style="border-color:var(--border);margin:20px 0">
+
+          <h3>📝 Ejercicio 1: Escribe el comando en la página</h3>
+          <p>Escribe el comando para crear un proyecto Django llamado <code>mi_proyecto</code> en la carpeta actual:</p>
+          <div class="q">
+            <textarea id="curso3-q1" class="code-editor" placeholder="# Escribe el comando aquí..."></textarea>
+            <button style="margin-top:12px" onclick="checkText('curso3-q1','django-admin startproject mi_proyecto .','¡Genial! No olvides el punto al final.','Recuerda: django-admin startproject NOMBRE .')">Comprobar</button>
+            <div id="res-curso3-q1" class="result"></div>
+          </div>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h3>💻 Ejercicio 2: Hazlo en VS Code</h3>
+          <div class="vs-code-box">
+            <h4>👨‍💻 Paso a paso en VS Code</h4>
+            <ol>
+              <li>Abre Visual Studio Code</li>
+              <li>Crea una carpeta nueva llamada <code>MiProyectoDjango</code> en cualquier lugar (ej: Escritorio)</li>
+              <li>En VS Code, ve a <strong>Archivo → Abrir carpeta...</strong> y selecciona <code>MiProyectoDjango</code></li>
+              <li>Abre la terminal de VS Code: <strong>Terminal → Nueva terminal</strong></li>
+              <li>Activa tu entorno virtual (si lo tienes) o crea uno nuevo:</li>
+            </ol>
+            <div class="codebox">py -m venv venv
+venv\Scripts\Activate.ps1</div>
+            <ol start="6">
+              <li>Instala Django:</li>
+            </ol>
+            <div class="codebox">pip install django</div>
+            <ol start="7">
+              <li>Crea el proyecto Django:</li>
+            </ol>
+            <div class="codebox">django-admin startproject core .</div>
+            <ol start="8">
+              <li>Explora la estructura de archivos que se creó en la pestaña de la izquierda de VS Code!</li>
+            </ol>
+          </div>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h3>📝 Ejercicio 3: Crea un modelo simple</h3>
+          <p>Ahora, en VS Code, crea una app y un modelo simple. Primero, crea la app:</p>
+          <div class="codebox">python manage.py startapp mi_app</div>
+          <p>Luego, abre <code>mi_app/models.py</code> y escribe este código (usa el editor de abajo para practicar):</p>
+          <div class="q">
+            <textarea id="curso3-q2" class="code-editor" placeholder="# Escribe tu modelo aquí...
+from django.db import models
+
+class Producto(models.Model):
+    nombre = models.CharField(max_length=100)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.nombre"></textarea>
+            <button style="margin-top:12px" class="secondary" onclick="document.getElementById('curso3-q2').value = 'from django.db import models\n\nclass Producto(models.Model):\n    nombre = models.CharField(max_length=100)\n    precio = models.DecimalField(max_digits=10, decimal_places=2)\n\n    def __str__(self):\n        return self.nombre'">Ver respuesta</button>
+          </div>
+
+          <div class="complete"><button onclick="completeLesson('curso-3')">Marcar Lección 3 como completada</button><span id="done-curso-3" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="arquitectura" class="section">
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: ¡Empecemos por lo más básico! ¿Qué es una URL?</h2>
+          <div class="q">
+            <strong>Imagina esto:</strong>
+            <p>Una URL es la <strong>dirección</strong> que escribes en la barra del navegador para ir a un lugar en internet. Por ejemplo:</p>
+            <ul>
+              <li><code>https://www.google.com</code> → la URL de Google</li>
+              <li><code>http://127.0.0.1:8000/usuarios/login/</code> → la URL para iniciar sesión en tu proyecto</li>
+            </ul>
+          </div>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h2>Paso 2: ¿Qué son las "rutas" en Django?</h2>
+          <h3>Analogía super simple:</h3>
+          <p>Imagina que tu proyecto Django es un <strong>edificio con varias habitaciones</strong>:</p>
+          <ul>
+            <li>El <strong>recepción</strong> del edificio es el archivo <span class="kbd">core/urls.py</span></li>
+            <li>Cada <strong>habitación</strong> es una <strong>app</strong> (usuarios, clientes, facturacion, etc.)</li>
+            <li>Las <strong>rutas</strong> son las <strong>flechas</strong> que te dicen cómo llegar a cada habitación</li>
+          </ul>
+
+          <h3>En palabras sencillas:</h3>
+          <p>Las rutas le dicen a Django: <em>"Si alguien visita esta dirección, haz esto"</em>.</p>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h2>Paso 3: El archivo más importante: core/urls.py</h2>
+          <p><strong>TODAS</strong> las peticiones a tu proyecto pasan primero por aquí. Es la <strong>recepción</strong> del edificio.</p>
+
+          <h3>Dentro de core/urls.py hay una lista llamada urlpatterns</h3>
+          <p>Esta lista es como un <strong>libro de direcciones</strong>: cada línea dice "si viene alguien por aquí, llévalo a esta app".</p>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h2>Paso 4: 2 palabras clave que debes saber: path() e include()</h2>
+          
+          <h3>1. path() — "Crea una nueva dirección"</h3>
+          <p>Imagina que path() es como <strong>pegar un letrero en la pared</strong> que dice: "Por aquí se va a X lugar".</p>
+          <p>Ejemplo:</p>
+          <div class="codebox">path('usuarios/', ...)</div>
+          <p>Esto significa: <em>"Si alguien escribe /usuarios/ en el navegador, haz lo que viene a continuación"</em>.</p>
+
+          <h3>2. include() — "Ve a buscar más direcciones en otra carpeta"</h3>
+          <p>include() es como decir: <em>"No sé todas las direcciones de esta habitación, ve a preguntar a la app correspondiente"</em>.</p>
+          <p>Ejemplo:</p>
+          <div class="codebox">path('usuarios/', include('apps.usuarios.urls'))</div>
+          <p>Esto significa: <em>"Si alguien viene por /usuarios/, ve a la app 'usuarios' y mira su archivo urls.py para saber qué hacer"</em>.</p>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h2>Paso 5: Veamos un ejemplo REAL y SIMPLE</h2>
+          <div class="codebox"># Esto es lo que hay en core/urls.py
+from django.urls import path, include
+
+urlpatterns = [
+    # 1. Si alguien va a /admin/, usa el admin de Django
+    path('admin/', admin.site.urls),
+    
+    # 2. Si alguien va a /usuarios/, ve a la app de usuarios
+    path('usuarios/', include('apps.usuarios.urls')),
+    
+    # 3. Si alguien va a /clientes/, ve a la app de clientes
+    path('clientes/', include('apps.clientes.urls')),
+    
+    # 4. Si alguien va a la página principal (solo /), ve a la app de inicio
+    path('', include('apps.inicio.urls')),
+]</div>
+
+          <hr style="border-color:var(--border);margin:24px 0">
+
+          <h2>Paso 6: ¡Vamos a seguir el flujo de una petición! 🚶‍♂️</h2>
+          <h3>Imagina que alguien escribe en el navegador: http://127.0.0.1:8000/usuarios/login/</h3>
+          <p>Esto es lo que pasa PASO A PASO:</p>
+          <ol>
+            <li>El navegador envía la petición a Django.</li>
+            <li>Django va a la <strong>recepción</strong>: <span class="kbd">core/urls.py</span>.</li>
+            <li>Django ve que la URL empieza por <code>'usuarios/'</code>.</li>
+            <li>Django busca en la lista <code>urlpatterns</code> y encuentra: <code>path('usuarios/', include('apps.usuarios.urls'))</code>.</li>
+            <li>Django dice: <em>"Ah, ok, las direcciones de usuarios están en apps/usuarios/urls.py — voy allá"</em>.</li>
+            <li>Django abre <span class="kbd">apps/usuarios/urls.py</span> y busca la parte restante de la URL: <code>'login/'</code>.</li>
+            <li>Django encuentra la ruta para <code>'login/'</code> y ejecuta la <strong>vista</strong> correspondiente (el código que muestra la página de login).</li>
+            <li>¡Listo! El usuario ve la página de inicio de sesión.</li>
+          </ol>
+        </div>
+        <div class="practice">
+          <h2>Código real de tu repositorio (así es en tu proyecto!)</h2>
+          <div class="codebox">urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('licensing/', include('apps.licensing.urls')),
+    path('usuarios/', include('apps.usuarios.urls')),
+    path('clientes/', include('apps.clientes.urls')),
+    path('inventario/', include('apps.inventario.urls')),
+    path('compras/', include('apps.compras.urls')),
+    path('ordenes/', include('apps.ordenes.urls')),
+    path('facturacion/', include('apps.facturacion.urls')),
+    path('pagos/', include('apps.pagos.urls')),
+    path('', include('apps.inicio.urls')),
+]</div>
+
+          <div class="q">
+            <h3>Ejercicio 1: ¿Qué app se encarga del login?</h3>
+            <p><strong>Pista:</strong> Mira el código real de arriba. ¿Qué línea dice 'usuarios/'?</p>
+            <label><strong>Escribe la ruta de la app (solo la palabra, sin barras ni nada):</strong></label>
+            <input type="text" id="quiz-arq-1" placeholder="Escribe la palabra..." />
+            <button class="secondary" onclick="checkText('quiz-arq-1',['usuarios','usuarios/'],'res-arq-1')">Comprobar</button>
+            <div id="res-arq-1" class="result"></div>
+          </div>
+
+          <div class="q">
+            <h3>Ejercicio 2: ¿Qué función "incluye" rutas de otra app?</h3>
+            <p><strong>Opción 1:</strong> path()</p>
+            <p><strong>Opción 2:</strong> include()</p>
+            <p><strong>Opción 3:</strong> redirect()</p>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-arq-2')">path()</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-arq-2')">include()</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-arq-2')">redirect()</button>
+            </div>
+            <div id="res-arq-2" class="result"></div>
+          </div>
+
+          <div class="complete"><button onclick="completeLesson('arquitectura')">Marcar como completada</button><span id="done-arquitectura" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="epica1" class="section">
+      <div class="lesson-nav">
+        <button onclick="showSub('e1-1')">1. Modelos</button>
+        <button onclick="showSub('e1-2')">2. Formularios</button>
+        <button onclick="showSub('e1-3')">3. Vistas</button>
+        <button onclick="showSub('e1-4')">4. Clientes</button>
+      </div>
+
+      <div id="e1-1" class="sublesson">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 1 · Modelos base</h2>
+            <p>La autenticación real parte del modelo nativo <span class="kbd">User</span> de Django, pero el proyecto lo amplía con <span class="kbd">Usuario</span>. Ese modelo añade nombres, apellidos, documento, teléfono y el campo más importante para permisos: <strong>rol</strong>.</p>
+            <p>Luego aparecen perfiles especializados. <span class="kbd">Conductor</span> extiende a un usuario con licencia y EPS. <span class="kbd">Cliente</span> cuelga del usuario con dirección, tipo y datos comerciales. Así el proyecto separa credenciales del dominio del negocio.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="usuario")
+    nombres = models.CharField(max_length=200)
+    apellidos = models.CharField(max_length=200)
+    telefono = models.CharField(max_length=20, blank=True)
+    documento = models.CharField(max_length=20)
+    rol = models.CharField(max_length=50, choices=ROLES)
+
+class Conductor(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE,
+                                   primary_key=True, related_name='perfil_conductor')
+    numero_licencia = models.CharField(max_length=50, unique=True)
+
+class Cliente(models.Model):
+    usuario = models.OneToOneField('usuarios.Usuario', on_delete=models.CASCADE,
+                                   primary_key=True, related_name='perfil_cliente')</div>
+            <div class="q">
+              <strong>Pregunta rápida</strong>
+              <div class="options">
+                <label><input type="radio" name="e1q1" value="a"> El rol se guarda en User</label>
+                <label><input type="radio" name="e1q1" value="b"> El rol se guarda en Usuario</label>
+                <label><input type="radio" name="e1q1" value="c"> El rol se guarda en Cliente</label>
+              </div>
+              <button class="secondary" onclick="checkRadio('e1q1','b','res-e1q1')">Comprobar</button>
+              <div id="res-e1q1" class="result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="e1-2" class="sublesson" style="display:none">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 1 · Formularios</h2>
+            <p>Los formularios no son solo HTML. Aquí validan que el correo no exista, que el documento no se repita y que las contraseñas coincidan. Eso concentra reglas de negocio antes de guardar en la base de datos.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">class RegistroForm(forms.ModelForm):
+    correo = forms.EmailField(...)
+    contrasena = forms.CharField(...)
+    confirmar_contrasena = forms.CharField(...)
+
+    def clean_correo(self):
+        correo = self.cleaned_data.get('correo')
+        if User.objects.filter(email=correo).exists():
+            raise forms.ValidationError("Este correo ya está registrado.")
+        return correo
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("contrasena")
+        confirm_password = cleaned_data.get("confirmar_contrasena")
+        if password and confirm_password and password != confirm_password:
+            self.add_error('confirmar_contrasena', "Las contraseñas no coinciden.")</div>
+            <div class="q">
+              <label><strong>Completa:</strong> El método que comprueba que ambas contraseñas coincidan se llama <span class="kbd">_____()</span></label>
+              <input type="text" id="quiz-e1-2" placeholder="Nombre del método" />
+              <button class="secondary" onclick="checkText('quiz-e1-2',['clean'],'res-e1-2')">Comprobar</button>
+              <div id="res-e1-2" class="result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="e1-3" class="sublesson" style="display:none">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 1 · Registro, login y paneles</h2>
+            <p>La vista <span class="kbd">registro</span> crea primero el <span class="kbd">User</span> de Django y luego guarda el perfil <span class="kbd">Usuario</span>. La vista <span class="kbd">login_usuario</span> autentica, asegura que el perfil exista y redirige según el rol: admin, cliente o conductor.</p>
+            <p>El panel admin carga métricas y usa caché; el panel conductor muestra sus pedidos y entregas. Esto ya te dice que la épica 1 no es solo login: también es distribución de permisos y paneles por rol.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">def registro(request):
+    if request.method == "POST":
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(username=email, email=email, password=password)
+            perfil = form.save(commit=False)
+            perfil.user = user
+            perfil.rol = "cliente"
+            perfil.save()
+            return redirect("usuarios:login")
+
+
+def login_usuario(request):
+    user = authenticate(request, username=identifier, password=password)
+    ...
+    if perfil.rol == "admin":
+        return redirect("usuarios:panel")
+    elif perfil.rol == "cliente":
+        return redirect("clientes:panel_cliente")
+    elif perfil.rol == "conductor":
+        return redirect("usuarios:panel_conductor")</div>
+            <div class="q">
+              <strong>Pregunta rápida</strong>
+              <div class="options">
+                <label><input type="radio" name="e1q3" value="a"> Tras registrarse, el usuario va directo a facturación</label>
+                <label><input type="radio" name="e1q3" value="b"> Tras registrarse, el usuario vuelve al login</label>
+                <label><input type="radio" name="e1q3" value="c"> Tras registrarse, el usuario se elimina</label>
+              </div>
+              <button class="secondary" onclick="checkRadio('e1q3','b','res-e1q3')">Comprobar</button>
+              <div id="res-e1q3" class="result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="e1-4" class="sublesson" style="display:none">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 1 · Cliente y pedidos</h2>
+            <p>El cliente no solo entra al sistema: también usa su panel, ve su historial y crea pedidos. Fíjate en algo importante: las vistas de cliente usan el usuario autenticado como punto de unión con los pedidos.</p>
+            <p>Cuando el cliente crea o edita un pedido, se revisa el stock y se usa una transacción atómica para evitar inconsistencias.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">@receiver(post_save, sender='usuarios.Usuario')
+def crear_perfil_cliente(sender, instance, created, **kwargs):
+    if created and instance.rol == 'cliente':
+        Cliente.objects.get_or_create(usuario=instance)
+
+@login_required
+def panel_cliente(request):
+    usuario = request.user.usuario
+    pedidos = Pedido.objects.filter(usuario=usuario)
+
+@login_required
+def crear_pedido(request):
+    with transaction.atomic():
+        nuevo_pedido = Pedido.objects.create(usuario=usuario, estado="pendiente")
+        ...
+        stock_obj.cantidad_actual = F('cantidad_actual') - cantidad
+        stock_obj.save()</div>
+            <div class="q">
+              <label><strong>Completa:</strong> El perfil de cliente se crea automáticamente con una señal <span class="kbd">post_____</span></label>
+              <input type="text" id="quiz-e1-4" placeholder="Completa la palabra" />
+              <button class="secondary" onclick="checkText('quiz-e1-4',['save'],'res-e1-4')">Comprobar</button>
+              <div id="res-e1-4" class="result"></div>
+            </div>
+            <div class="complete"><button onclick="completeLesson('epica1')">Marcar Épica 1 como completada</button><span id="done-epica1" class="mini muted"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="epica6" class="section">
+      <div class="lesson-nav">
+        <button onclick="showSub6('e6-1')">1. Pedido y factura</button>
+        <button onclick="showSub6('e6-2')">2. Registrar pago</button>
+        <button onclick="showSub6('e6-3')">3. Historial y señal</button>
+      </div>
+
+      <div id="e6-1" class="sublesson6">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 6 · De pedido a factura</h2>
+            <p>La factura nace ligada al pedido. El pedido representa la operación comercial; la factura representa la capa financiera de esa operación. Por eso el modelo <span class="kbd">Factura</span> tiene una relación <span class="kbd">OneToOneField</span> con <span class="kbd">Pedido</span>.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">class Pedido(models.Model):
+    codigo_pedido = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey('usuarios.Usuario', on_delete=models.CASCADE, related_name='pedidos')
+    total = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+
+class Factura(models.Model):
+    pedido = models.OneToOneField('ordenes.Pedido', on_delete=models.PROTECT,
+                                  related_name='factura', null=True, blank=True)
+    cliente = models.ForeignKey('usuarios.Usuario', on_delete=models.PROTECT,
+                                related_name='facturas', null=True, blank=True)
+    subtotal = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    iva = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    estado = models.CharField(max_length=15, choices=ESTADOS, default='pendiente')</div>
+            <div class="q">
+              <strong>Pregunta rápida</strong>
+              <div class="options">
+                <label><input type="radio" name="e6q1" value="a"> Una factura puede pertenecer a muchos pedidos</label>
+                <label><input type="radio" name="e6q1" value="b"> Una factura se asocia de forma uno a uno con un pedido</label>
+                <label><input type="radio" name="e6q1" value="c"> La factura no usa pedido</label>
+              </div>
+              <button class="secondary" onclick="checkRadio('e6q1','b','res-e6q1')">Comprobar</button>
+              <div id="res-e6q1" class="result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="e6-2" class="sublesson6" style="display:none">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 6 · Registrar pago</h2>
+            <p>Esta es la parte más delicada. La vista valida monto, método de pago, permisos, estado de la factura y saldo pendiente. Luego bloquea la factura con <span class="kbd">select_for_update()</span> dentro de una transacción atómica para evitar concurrencia rota.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">@login_required
+@require_POST
+def registrar_pago(request):
+    monto = Decimal(monto_str)
+    if monto <= 0:
+        return JsonResponse({'error': 'El monto debe ser mayor a cero'}, status=400)
+
+    with transaction.atomic():
+        factura = Factura.objects.select_for_update().get(id=factura_id)
+        if request.user.usuario.rol != 'admin' and factura.cliente != request.user.usuario:
+            return JsonResponse({'error': 'No autorizado'}, status=403)
+        if factura.estado == 'anulada':
+            return JsonResponse({'error': 'La factura está anulada'}, status=400)
+        if monto > factura.saldo_pendiente:
+            return JsonResponse({'error': 'El monto excede el saldo pendiente'}, status=400)
+        Pago.objects.create(factura=factura, monto=monto, codigo_metodo_pago=metodo_pago)</div>
+            <div class="q">
+              <label><strong>Completa:</strong> La función usada para bloquear la fila de la factura es <span class="kbd">select_for_ ______ ()</span></label>
+              <input type="text" id="quiz-e6-2" placeholder="Completa la palabra" />
+              <button class="secondary" onclick="checkText('quiz-e6-2',['update'],'res-e6-2')">Comprobar</button>
+              <div id="res-e6-2" class="result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="e6-3" class="sublesson6" style="display:none">
+        <div class="lesson">
+          <div class="explain">
+            <h2>Épica 6 · Pago, estado e historial</h2>
+            <p>Una factura puede tener varios pagos gracias al <span class="kbd">related_name='pagos'</span>. El modelo `Factura` calcula <span class="kbd">total_pagado</span> y <span class="kbd">saldo_pendiente</span>. Además, el modelo `Pago` tiene una señal `post_save` que marca la factura como pagada si ya no queda saldo.</p>
+          </div>
+          <div class="practice">
+            <h2>Código real</h2>
+            <div class="codebox">class Factura(models.Model):
+    @property
+    def total_pagado(self):
+        return sum(p.monto for p in self.pagos.all())
+
+    @property
+    def saldo_pendiente(self):
+        return self.total - self.total_pagado
+
+class Pago(models.Model):
+    factura = models.ForeignKey(Factura, on_delete=models.CASCADE, related_name='pagos')
+
+@receiver(post_save, sender=Pago)
+def actualizar_estado_factura(sender, instance, created, **kwargs):
+    if created:
+        factura = instance.factura
+        if factura.saldo_pendiente <= 0 and factura.estado != 'pagada':
+            factura.estado = 'pagada'
+            factura.save()</div>
+            <div class="q">
+              <strong>Pregunta rápida</strong>
+              <div class="options">
+                <label><input type="radio" name="e6q3" value="a"> El saldo pendiente se calcula restando el total pagado al total</label>
+                <label><input type="radio" name="e6q3" value="b"> El saldo pendiente se calcula con el login del usuario</label>
+                <label><input type="radio" name="e6q3" value="c"> El saldo pendiente no existe en el modelo</label>
+              </div>
+              <button class="secondary" onclick="checkRadio('e6q3','a','res-e6q3')">Comprobar</button>
+              <div id="res-e6q3" class="result"></div>
+            </div>
+            <div class="complete"><button onclick="completeLesson('epica6')">Marcar Épica 6 como completada</button><span id="done-epica6" class="mini muted"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zona-3" class="section">
+      <div class="hero">
+        <h1>⚙️ Zona 3 — Setup Real del Proyecto</h1>
+        <p>Aprende paso a paso a clonar el repo, configurar el entorno virtual, instalar dependencias y levantar el servidor real.</p>
+      </div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: Clonar el repositorio</h2>
+          <h3>Objetivo</h3>
+          <p>Descargar el código del repositorio GitHub a tu PC.</p>
+          <h3>¿Por qué es importante?</h3>
+          <p>Tu proyecto vive en GitHub. Clonarlo es hacer una copia local para trabajar.</p>
+          <h3>Comandos (Windows)</h3>
+          <div class="codebox">git clone https://github.com/Pato0139/Constru-trans_01.git
+cd Constru-trans_01</div>
+          <h3>Archivo clave en tu repo</h3>
+          <ul>
+            <li><span class="badge">README.md</span> tiene todas las instrucciones oficiales</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 1: Clonar el repo</h2>
+          <div class="vs-code-box">
+            <h4>👨‍💻 Paso a paso en VS Code</h4>
+            <ol>
+              <li>Abre Visual Studio Code</li>
+              <li>Abre la terminal de VS Code: <strong>Terminal → Nueva terminal</strong></li>
+              <li>Navega a la carpeta donde quieras guardar el proyecto (ej: Escritorio):</li>
+            </ol>
+            <div class="codebox">cd C:\Users\TU_USUARIO\Desktop</div>
+            <ol start="4">
+              <li>Clona el repositorio:</li>
+            </ol>
+            <div class="codebox">git clone https://github.com/Pato0139/Constru-trans_01.git
+cd Constru-trans_01</div>
+            <ol start="6">
+              <li>En VS Code, ve a <strong>Archivo → Abrir carpeta...</strong> y selecciona la carpeta <code>Constru-trans_01</code> que acabas de clonar</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 2: Crear y activar el entorno virtual</h2>
+          <h3>Objetivo</h3>
+          <p>Crear un entorno virtual aislado para el proyecto.</p>
+          <h3>Comandos (Windows)</h3>
+          <div class="codebox">py -m venv venv
+venv\Scripts\Activate.ps1</div>
+          <h3>Archivo clave en tu repo</h3>
+          <ul>
+            <li><span class="badge">requirements.txt</span> — lista de dependencias que instalaremos después</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 2: Entorno virtual</h2>
+          <div class="q">
+            <label><strong>Escribe el comando para crear un entorno virtual:</strong></label>
+            <textarea id="zona3-q1" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona3-q1','py -m venv venv','¡Genial! También vale python -m venv venv.','Mira la sección “Comandos (Windows)”')">Comprobar</button>
+            <div id="res-zona3-q1" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 3: Instalar dependencias</h2>
+          <h3>Objetivo</h3>
+          <p>Instalar todas las librerías que necesita el proyecto (Django, ReportLab, openpyxl, etc.).</p>
+          <h3>Comando</h3>
+          <div class="codebox">pip install -r requirements.txt</div>
+          <h3>Archivo clave en tu repo</h3>
+          <ul>
+            <li><span class="badge">requirements.txt</span> — tiene todas las dependencias listadas</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 3: Instalar dependencias</h2>
+          <div class="vs-code-box">
+            <h4>👨‍💻 En VS Code</h4>
+            <p>Con el entorno virtual activado (debes ver <code>(venv)</code> en la terminal), ejecuta:</p>
+            <div class="codebox">pip install -r requirements.txt</div>
+            <p class="muted" style="margin-top:10px">Espera a que termine de instalar todas las dependencias. Puede tardar un par de minutos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 4: Configurar el archivo .env</h2>
+          <h3>Objetivo</h3>
+          <p>Configurar las variables de entorno (secret keys, base de datos, etc.).</p>
+          <h3>¿Qué hacer?</h3>
+          <ol>
+            <li>Copia el archivo <code>.env.example</code> y renómbralo a <code>.env</code></li>
+            <li>Rellena los valores reales (pregunta al admin por las credenciales)</li>
+          </ol>
+          <h3>Archivos clave en tu repo</h3>
+          <ul>
+            <li><span class="badge">.env.example</span> — plantilla de variables de entorno</li>
+            <li><span class="badge">setup_project.bat</span> — script para Windows (opcional)</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 4: .env</h2>
+          <div class="q">
+            <label><strong>¿Qué archivo copias para crear el .env?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona3-q2')">requirements.txt</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-zona3-q2')">.env.example</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona3-q2')">manage.py</button>
+            </div>
+            <div id="res-zona3-q2" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 5: Aplicar migraciones y crear superusuario</h2>
+          <h3>Objetivo</h3>
+          <p>Crear las tablas en la base de datos y crear un usuario admin.</p>
+          <h3>Comandos</h3>
+          <div class="codebox">python manage.py migrate
+python manage.py createsuperuser</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 5: Migraciones y superusuario</h2>
+          <div class="q">
+            <label><strong>Escribe el comando para aplicar migraciones:</strong></label>
+            <textarea id="zona3-q3" class="code-editor" placeholder="# Escribe el comando..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona3-q3','python manage.py migrate','¡Genial!','Mira la sección “Comandos”')">Comprobar</button>
+            <div id="res-zona3-q3" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 6: Levantar el servidor</h2>
+          <h3>Objetivo</h3>
+          <p>Iniciar el servidor de desarrollo de Django.</p>
+          <h3>Comando</h3>
+          <div class="codebox">python manage.py runserver</div>
+          <h3>Luego abre en tu navegador:</h3>
+          <div class="codebox">http://127.0.0.1:8000</div>
+        </div>
+        <div class="practice">
+          <h2>¡Listo para correr!</h2>
+          <div class="complete"><button onclick="completeLesson('zona-3')">Marcar Zona 3 como completada</button><span id="done-zona-3" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zona-4" class="section">
+      <div class="hero">
+        <h1>📊 Zona 4 — MER Completo</h1>
+        <p>Analiza el diagrama entidad-relación y cómo cada entidad se refleja en el código real del repositorio.</p>
+      </div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: ¿Qué es el MER?</h2>
+          <h3>Objetivo</h3>
+          <p>Entender qué es un Modelo Entidad-Relación y por qué es útil.</p>
+          <h3>¿Qué es?</h3>
+          <p>El MER es un diagrama que muestra las <strong>entidades</strong> (tablas) del sistema, sus <strong>campos</strong> y las <strong>relaciones</strong> entre ellas.</p>
+          <h3>Relaciones importantes:</h3>
+          <ul>
+            <li><strong>1:1</strong> (Uno a uno): Un registro de A se relaciona con UN solo registro de B (ej: User ↔ Usuario)</li>
+            <li><strong>1:N</strong> (Uno a muchos): Un registro de A se relaciona con VARIOS registros de B (ej: Pedido ↔ DetallePedido)</li>
+            <li><strong>N:M</strong> (Muchos a muchos): Varios registros de A se relacionan con varios de B (ej: Conductor ↔ Vehiculo, tabla puente ConductorVehiculo)</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 1: Tipos de relación</h2>
+          <div class="q">
+            <label><strong>¿Qué tipo de relación es User ↔ Usuario?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona4-q1')">1:N</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-zona4-q1')">1:1</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona4-q1')">N:M</button>
+            </div>
+            <div id="res-zona4-q1" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 2: Entidad Usuario y User</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer la entidad Usuario y su relación con el User nativo de Django.</p>
+          <h3>Qué hay en el MER:</h3>
+          <p>El MER define un usuario con nombres, apellidos, teléfono, documento, rol, etc.</p>
+          <h3>Código real del repo:</h3>
+          <div class="codebox">from django.contrib.auth.models import User
+
+class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="usuario")
+    nombres = models.CharField(max_length=200)
+    apellidos = models.CharField(max_length=200)
+    telefono = models.CharField(max_length=20, blank=True)
+    documento = models.CharField(max_length=20)
+    rol = models.CharField(max_length=50, choices=ROLES)
+
+ROLES = [
+    ('admin', 'Admin'),
+    ('cliente', 'Cliente'),
+    ('conductor', 'Conductor'),
+    ('empleado', 'Empleado'),
+]</div>
+          <h3>Archivo a revisar:</h3>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span></li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 2: Usuario y User</h2>
+          <div class="q">
+            <label><strong>¿Qué relación hay entre User y Usuario?</strong></label>
+            <textarea id="zona4-q2" class="code-editor" placeholder="# Escribe el tipo de campo..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona4-q2','OneToOneField','¡Genial! Es una relación Uno a Uno.','Mira el código real: models.OneToOneField')">Comprobar</button>
+            <div id="res-zona4-q2" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 3: Entidades Cliente y Conductor</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer las entidades que extienden a Usuario.</p>
+          <h3>Código real del repo:</h3>
+          <div class="codebox"># Cliente (apps/clientes/models.py)
+class Cliente(models.Model):
+    usuario = models.OneToOneField('usuarios.Usuario', on_delete=models.CASCADE,
+                                   primary_key=True, related_name='perfil_cliente')
+    direccion_principal = models.CharField(max_length=200)
+    tipo_cliente = models.CharField(max_length=20)
+
+# Conductor (apps/usuarios/models.py)
+class Conductor(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE,
+                                   primary_key=True, related_name='perfil_conductor')
+    numero_licencia = models.CharField(max_length=50, unique=True)
+    categoria_licencia = models.CharField(max_length=10)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 3: Cliente y Conductor</h2>
+          <div class="q">
+            <label><strong>¿Qué tienen en común Cliente y Conductor?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona4-q3')">Ambos son Materiales</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-zona4-q3')">Ambos extienden a Usuario con OneToOneField</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona4-q3')">Ambos son Facturas</button>
+            </div>
+            <div id="res-zona4-q3" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 4: Entidades Pedido, DetallePedido y Entrega</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer las entidades relacionadas con pedidos.</p>
+          <h3>Relaciones clave:</h3>
+          <ul>
+            <li><strong>Pedido ↔ DetallePedido</strong>: 1:N (un pedido tiene varios detalles)</li>
+            <li><strong>Pedido ↔ Entrega</strong>: 1:N (un pedido puede tener varias entregas)</li>
+          </ul>
+          <h3>Código real (resumido):</h3>
+          <div class="codebox">class Pedido(models.Model):
+    codigo_pedido = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey('usuarios.Usuario', on_delete=models.CASCADE)
+    fecha_solicitud = models.DateTimeField(auto_now_add=True)
+    total = models.DecimalField(max_digits=12, decimal_places=2)
+    estado = models.CharField(max_length=20)
+
+class DetallePedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='detalles')
+    material = models.ForeignKey('usuarios.MaterialConstruccion', on_delete=models.PROTECT)
+    cantidad = models.IntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 4: Pedido y DetallePedido</h2>
+          <div class="q">
+            <label><strong>¿Qué relación hay entre Pedido y DetallePedido?</strong></label>
+            <textarea id="zona4-q4" class="code-editor" placeholder="# Escribe el tipo de relación..."></textarea>
+            <button style="margin-top:10px" class="secondary" onclick="document.getElementById('zona4-q4').value = '1:N (Uno a muchos)'">Ver respuesta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 5: Entidades Factura y Pago</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer las entidades financieras.</p>
+          <h3>Relaciones clave:</h3>
+          <ul>
+            <li><strong>Pedido ↔ Factura</strong>: 1:1 (un pedido tiene una factura)</li>
+            <li><strong>Factura ↔ Pago</strong>: 1:N (una factura puede tener varios pagos)</li>
+          </ul>
+          <h3>Código real (resumido):</h3>
+          <div class="codebox">class Factura(models.Model):
+    id_factura = models.AutoField(primary_key=True)
+    pedido = models.OneToOneField('ordenes.Pedido', on_delete=models.PROTECT, related_name='factura')
+    total = models.DecimalField(max_digits=12, decimal_places=2)
+    estado = models.CharField(max_length=15)
+
+    @property
+    def total_pagado(self):
+        return sum(p.monto for p in self.pagos.all())
+
+    @property
+    def saldo_pendiente(self):
+        return self.total - self.total_pagado
+
+class Pago(models.Model):
+    factura = models.ForeignKey(Factura, on_delete=models.CASCADE, related_name='pagos')
+    monto = models.DecimalField(max_digits=12, decimal_places=2)
+    fecha = models.DateTimeField(auto_now_add=True)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 5: Factura y Pago</h2>
+          <div class="complete"><button onclick="completeLesson('zona-4')">Marcar Zona 4 como completada</button><span id="done-zona-4" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zona-6" class="section">
+      <div class="hero">
+        <h1>📦 Zona 6 — Épica 2: Materiales e Inventario</h1>
+        <p>Aprende sobre MaterialConstruccion, Stock y movimientos de inventario. Responsable histórico: Iván Tai</p>
+      </div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: MaterialConstruccion (Material)</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer la entidad que representa los materiales de construcción.</p>
+          <h3>Código real del repo:</h3>
+          <div class="codebox">class MaterialConstruccion(models.Model):
+    cod_material = models.AutoField(primary_key=True)
+    catalogo = models.ForeignKey(Catalogo, on_delete=models.SET_NULL, null=True, blank=True)
+    nombre = models.CharField(max_length=100)
+    unidad_medida = models.CharField(max_length=20)
+    descripcion = models.TextField()
+    precio_referencia = models.DecimalField(max_digits=10, decimal_places=2)
+
+Material = MaterialConstruccion  # Alias para compatibilidad</div>
+          <h3>Archivo a revisar:</h3>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span> (sí, los materiales están en usuarios!)</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 1: MaterialConstruccion</h2>
+          <div class="q">
+            <label><strong>¿Cuál es el campo clave primaria de MaterialConstruccion?</strong></label>
+            <textarea id="zona6-q1" class="code-editor" placeholder="# Escribe el nombre del campo..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona6-q1','cod_material','¡Genial! También puedes usar el alias Material.','Mira el código: cod_material = models.AutoField(primary_key=True)')">Comprobar</button>
+            <div id="res-zona6-q1" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 2: Stock</h2>
+          <h3>Objetivo</h3>
+          <p>Conocer la entidad que controla la cantidad disponible de cada material.</p>
+          <h3>Relación clave:</h3>
+          <p><strong>MaterialConstruccion ↔ Stock</strong>: 1:1 (un material tiene un solo stock)</p>
+          <h3>Código real:</h3>
+          <div class="codebox">class Stock(models.Model):
+    material = models.OneToOneField(MaterialConstruccion, on_delete=models.CASCADE,
+                                    primary_key=True, related_name='stock_info')
+    cantidad_actual = models.IntegerField(default=0)
+    stock_minimo = models.IntegerField(default=10)
+    ubicacion = models.CharField(max_length=120, blank=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 2: Stock</h2>
+          <div class="q">
+            <label><strong>¿Qué relación hay entre Material y Stock?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona6-q2')">1:N</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-zona6-q2')">1:1</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona6-q2')">N:M</button>
+            </div>
+            <div id="res-zona6-q2" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 3: Uso de @property en Material</h2>
+          <h3>Objetivo</h3>
+          <p>Entender cómo se accede al stock desde el material usando @property.</p>
+          <h3>Código real:</h3>
+          <div class="codebox">class MaterialConstruccion(models.Model):
+    # ... campos ...
+
+    @property
+    def stock(self):
+        try:
+            return self.stock_info.cantidad_actual
+        except Stock.DoesNotExist:
+            return 0
+
+    @property
+    def id(self):
+        return self.cod_material</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 3: @property</h2>
+          <div class="complete"><button onclick="completeLesson('zona-6')">Marcar Zona 6 como completada</button><span id="done-zona-6" class="mini muted"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zona-7" class="section">
+      <div class="hero">
+        <h1>📋 Zona 7 — Épica 3: Pedidos</h1>
+        <p>Descubre cómo funciona Pedido, DetallePedido, transacciones, select_for_update y F expressions.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <p class="muted">Responsable histórico: Juanes</p>
+        <div class="complete"><button onclick="completeLesson('zona-7')">Marcar Zona 7 como completada</button><span id="done-zona-7" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-8" class="section">
+      <div class="hero">
+        <h1>🚚 Zona 8 — Épica 4: Transporte</h1>
+        <p>Explora Vehiculo, ConductorVehiculo y Entrega.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <p class="muted">Responsable histórico: Michel</p>
+        <div class="complete"><button onclick="completeLesson('zona-8')">Marcar Zona 8 como completada</button><span id="done-zona-8" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-9" class="section">
+      <div class="hero">
+        <h1>🛒 Zona 9 — Épica 5: Proveedores y Compras</h1>
+        <p>Aprende sobre Proveedor, Compra y DetalleCompra.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <p class="muted">Responsable histórico: RR</p>
+        <div class="complete"><button onclick="completeLesson('zona-9')">Marcar Zona 9 como completada</button><span id="done-zona-9" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-11" class="section">
+      <div class="hero">
+        <h1>📈 Zona 11 — Épica 7: Reportes e Historial</h1>
+        <p>Generación de PDF, Excel y XML, y auditoría de acciones del sistema.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <p class="muted">Responsable histórico: RR</p>
+        <div class="complete"><button onclick="completeLesson('zona-11')">Marcar Zona 11 como completada</button><span id="done-zona-11" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-13" class="section">
+      <div class="hero">
+        <h1>📖 Zona 13 — Cómo Leer Este Repo Sin Perderse</h1>
+        <p>Entrenamiento para leer código real, archivo por archivo.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <div class="complete"><button onclick="completeLesson('zona-13')">Marcar Zona 13 como completada</button><span id="done-zona-13" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-14" class="section">
+      <div class="hero">
+        <h1>🎤 Zona 14 — Modo Defensa / Entrevista / Exposición</h1>
+        <p>Preguntas, retos y simulación de sustentación del proyecto.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <div class="complete"><button onclick="completeLesson('zona-14')">Marcar Zona 14 como completada</button><span id="done-zona-14" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="zona-15" class="section">
+      <div class="hero">
+        <h1>📚 Zona 15 — Glosario Técnico del Proyecto</h1>
+        <p>Definiciones claras de todos los términos técnicos usados en el proyecto.</p>
+      </div>
+      <div class="card">
+        <h2>Contenido próximamente</h2>
+        <div class="complete"><button onclick="completeLesson('zona-15')">Marcar Zona 15 como completada</button><span id="done-zona-15" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="flujo" class="section">
+      <div class="card">
+        <h2>Flujo completo del sistema que debes memorizar</h2>
+        <ol>
+          <li>El usuario entra por una ruta declarada en <span class="kbd">core/urls.py</span>.</li>
+          <li>Si es autenticación, la app <span class="kbd">usuarios</span> recibe login, registro, recuperación y paneles.</li>
+          <li>Si el usuario es cliente, se apoya en el modelo <span class="kbd">Cliente</span> y en sus vistas para crear pedidos.</li>
+          <li>El pedido se guarda con detalles y afecta el stock.</li>
+          <li>La parte financiera usa ese pedido para crear una factura.</li>
+          <li>Los pagos se registran con validaciones, método de pago y control transaccional.</li>
+          <li>Cuando el saldo llega a cero, la factura se marca como pagada.</li>
+        </ol>
+        <div class="q">
+          <label><strong>Explícalo con tus palabras:</strong> escribe en 4 o 5 líneas cómo se conectan Usuario → Cliente → Pedido → Factura → Pago.</label>
+          <textarea id="free-flow" rows="8" placeholder="Escribe tu explicación aquí..."></textarea>
+          <div class="mini muted" style="margin-top:8px">Tip: usa esta caja como cuaderno de estudio.</div>
+        </div>
+        <div class="complete"><button onclick="completeLesson('flujo')">Marcar como completada</button><span id="done-flujo" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="retos" class="section">
+      <div class="twocol">
+        <div class="card">
+          <h2>Reto 1 · Defiende Épica 1</h2>
+          <p>Sin mirar el código, responde:</p>
+          <ul>
+            <li>¿Por qué existe `Usuario` si ya existe `User`?</li>
+            <li>¿Dónde se guarda el rol?</li>
+            <li>¿Cómo se crea el perfil cliente?</li>
+            <li>¿A dónde redirige el login según cada rol?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Reto 2 · Defiende Épica 6</h2>
+          <ul>
+            <li>¿Qué relación une pedido y factura?</li>
+            <li>¿Cómo se evita pagar más del saldo?</li>
+            <li>¿Qué hace `select_for_update()`?</li>
+            <li>¿Cómo pasa una factura a pagada?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h2>Autoevaluación final</h2>
+        <div class="q">
+          <label><strong>Escribe el nombre de la función que registra pagos:</strong></label>
+          <input type="text" id="final1" placeholder="Nombre exacto" />
+          <button class="secondary" onclick="checkText('final1',['registrar_pago'],'final1r')">Comprobar</button>
+          <div id="final1r" class="result"></div>
+        </div>
+        <div class="q">
+          <label><strong>Escribe el nombre del modelo extendido del usuario:</strong></label>
+          <input type="text" id="final2" placeholder="Modelo exacto" />
+          <button class="secondary" onclick="checkText('final2',['usuario'],'final2r')">Comprobar</button>
+          <div id="final2r" class="result"></div>
+        </div>
+        <div class="q">
+          <label><strong>Escribe el nombre del modelo financiero principal:</strong></label>
+          <input type="text" id="final3" placeholder="Modelo exacto" />
+          <button class="secondary" onclick="checkText('final3',['factura'],'final3r')">Comprobar</button>
+          <div id="final3r" class="result"></div>
+        </div>
+        <div class="complete"><button onclick="completeLesson('retos')">Marcar como completada</button><span id="done-retos" class="mini muted"></span></div>
+      </div>
+    </section>
+
+    <section id="fuentes" class="section">
+      <div class="card">
+        <h2>Fuentes usadas para construir este proyecto</h2>
+        <ul class="source-list">
+          <li><a href="https://github.com/Pato0139/Constru-trans_01.git" target="_blank" rel="noreferrer">Repositorio Constru-trans_01</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/README.md" target="_blank" rel="noreferrer">README.md</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/core/urls.py" target="_blank" rel="noreferrer">core/urls.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/usuarios/models.py" target="_blank" rel="noreferrer">apps/usuarios/models.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/usuarios/forms.py" target="_blank" rel="noreferrer">apps/usuarios/forms.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/usuarios/views.py" target="_blank" rel="noreferrer">apps/usuarios/views.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/clientes/models.py" target="_blank" rel="noreferrer">apps/clientes/models.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/clientes/views.py" target="_blank" rel="noreferrer">apps/clientes/views.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/ordenes/models.py" target="_blank" rel="noreferrer">apps/ordenes/models.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/facturacion/models.py" target="_blank" rel="noreferrer">apps/facturacion/models.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/facturacion/views.py" target="_blank" rel="noreferrer">apps/facturacion/views.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/pagos/models.py" target="_blank" rel="noreferrer">apps/pagos/models.py</a></li>
+          <li><a href="https://raw.githubusercontent.com/Pato0139/Constru-trans_01/main/apps/pagos/views.py" target="_blank" rel="noreferrer">apps/pagos/views.py</a></li>
+        </ul>
+        <div class="complete"><button onclick="completeLesson('fuentes')">Marcar como completada</button><span id="done-fuentes" class="mini muted"></span></div>
+      </div>
+      <div class="footer">Hecho para estudiar tu código exacto, no un ejemplo genérico.</div>
+    </section>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
