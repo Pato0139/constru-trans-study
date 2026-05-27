@@ -1,12 +1,12 @@
 const sections=[...document.querySelectorAll('.section')];
 const navLinks=[...document.querySelectorAll('.nav a')];
-const lessonIds=['inicio','guia-vscode','zona-0','curso-desde-cero','arquitectura','zona-3','zona-4','epica1','zona-6','epica6','flujo','retos','fuentes','zona-7','zona-8','zona-9','zona-11','zona-13','zona-14','zona-15'];
+const lessonIds=['inicio','guia-vscode','zona-0','curso-desde-cero','arquitectura','zona-3','zona-4','epica1','zona-6','zona-7','zona-8','zona-9','epica6','zona-11','zona-13','zona-14','zona-15','flujo','retos','fuentes'];
 const stored=JSON.parse(localStorage.getItem('ctStudyDone')||'{}');
 
 function updateProgress(){
   let count=lessonIds.filter(id=>stored[id]).length;
-  const total=12; // main learning milestones
-  const countForBar=['inicio','guia-vscode','zona-0','curso-desde-cero','arquitectura','zona-3','zona-4','epica1','zona-6','epica6','flujo','retos'].filter(id=>stored[id]).length;
+  const total=18; // main learning milestones (now includes all zones 7-11,13-15)
+  const countForBar=['inicio','guia-vscode','zona-0','curso-desde-cero','arquitectura','zona-3','zona-4','epica1','zona-6','zona-7','zona-8','zona-9','epica6','zona-11','zona-13','zona-14','zona-15','flujo','retos'].filter(id=>stored[id]).length;
   document.getElementById('barFill').style.width=(countForBar/total*100)+'%';
   document.getElementById('progressText').textContent=`${countForBar} / ${total} lecciones completadas`;
   Object.keys(stored).forEach(id=>{ const el=document.getElementById('done-'+id); if(el) el.textContent='✔ completada'; });
@@ -448,6 +448,22 @@ const quizFeedback = {
     explicacion: 'Los tipos de reporte son inventario, ventas, compras, entregas y financiero.',
     pista: 'Mira el código: TIPOS = [...]',
     codigo: "TIPOS = [\n        ('inventario', 'Inventario'),\n        ('ventas', 'Ventas'),\n        ('compras', 'Compras'),\n        ('entregas', 'Entregas'),\n        ('financiero', 'Financiero'),\n    ]"
+  },
+  'zona13-q1': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 2: Abre core/urls.py',
+    fragmento: 'core/urls.py',
+    explicacion: 'El archivo que conecta todas las apps del proyecto es core/urls.py.',
+    pista: 'Mira el Paso 2 de esta zona',
+    codigo: 'core/urls.py'
+  },
+  'res-zona13-q1': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 2: Abre core/urls.py',
+    fragmento: 'core/urls.py',
+    explicacion: 'El archivo que conecta todas las apps del proyecto es core/urls.py.',
+    pista: 'Mira el Paso 2 de esta zona',
+    codigo: 'core/urls.py'
   }
 };
 

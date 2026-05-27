@@ -1892,20 +1892,311 @@ class DetalleCompra(models.Model):
         <h1>📖 Zona 13 — Cómo Leer Este Repo Sin Perderse</h1>
         <p>Entrenamiento para leer código real, archivo por archivo.</p>
       </div>
-      <div class="card">
-        <h2>Contenido próximamente</h2>
-        <div class="complete"><button onclick="completeLesson('zona-13')">Marcar Zona 13 como completada</button><span id="done-zona-13" class="mini muted"></span></div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Paso 1: Empezar por la raíz del proyecto</h2>
+          <h3>Archivos clave en la raíz:</h3>
+          <ul>
+            <li><span class="badge">README.md</span>: Lee primero, tiene toda la documentación del proyecto</li>
+            <li><span class="badge">manage.py</span>: Archivo de gestión de Django</li>
+            <li><span class="badge">requirements.txt</span>: Lista de dependencias del proyecto</li>
+            <li><span class="badge">pyproject.toml</span>: Configuración del proyecto (para herramientas modernas)</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 1: Encuentra los archivos clave</h2>
+          <div class="vs-code-box">
+            <h4>👨‍💻 En tu repo Constru-trans_01:</h4>
+            <ol>
+              <li>Abre la carpeta raíz del proyecto</li>
+              <li>Localiza el archivo README.md y léelo</li>
+              <li>Localiza el archivo manage.py</li>
+              <li>Localiza el archivo requirements.txt</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 2: Explorar la carpeta core/</h2>
+          <h3>Archivos clave en core/:</h3>
+          <ul>
+            <li><span class="badge">core/settings/</span>: Configuración modular (base.py, development.py, production.py)</li>
+            <li><span class="badge">core/urls.py</span>: Rutas principales del proyecto (incluye todas las apps)</li>
+            <li><span class="badge">core/routers.py</span>: Router de base de datos (decide entre SQLite local y PostgreSQL remoto)</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 2: Abre core/urls.py</h2>
+          <div class="q">
+            <label><strong>¿Qué archivo conecta todas las apps del proyecto?</strong></label>
+            <textarea id="zona13-q1" class="code-editor" placeholder="# Escribe el nombre del archivo..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona13-q1','core/urls.py','¡Genial!','Mira el Paso 2 de esta zona')">Comprobar</button>
+            <div id="res-zona13-q1" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 3: Explorar las apps en apps/</h2>
+          <h3>Estructura de una app típica (ej: apps/usuarios/):</h3>
+          <ul>
+            <li><span class="badge">models.py</span>: Modelos de la base de datos</li>
+            <li><span class="badge">views.py</span>: Vistas (logica de la app)</li>
+            <li><span class="badge">urls.py</span>: Rutas específicas de la app</li>
+            <li><span class="badge">forms.py</span>: Formularios</li>
+            <li><span class="badge">templates/</span>: Plantillas HTML</li>
+            <li><span class="badge">migrations/</span>: Migraciones de la base de datos</li>
+          </ul>
+          <h3>Orden recomendado para leer una app:</h3>
+          <ol>
+            <li>Primero: models.py (entender los datos)</li>
+            <li>Segundo: urls.py (ver las rutas)</li>
+            <li>Tercero: views.py (ver la lógica)</li>
+            <li>Cuarto: templates/ (ver la interfaz)</li>
+          </ol>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 3: Lee una app</h2>
+          <div class="vs-code-box">
+            <h4>👨‍💻 Con apps/usuarios:</h4>
+            <ol>
+              <li>Abre apps/usuarios/models.py y lee los modelos Usuario, Conductor, MaterialConstruccion, Stock</li>
+              <li>Abre apps/usuarios/urls.py y ve las rutas</li>
+              <li>Abre apps/usuarios/views.py y lee alguna vista (ej: login, registro)</li>
+            </ol>
+          </div>
+          <div class="complete"><button onclick="completeLesson('zona-13')">Marcar Zona 13 como completada</button><span id="done-zona-13" class="mini muted"></span></div>
+        </div>
       </div>
     </section>
 
     <section id="zona-14" class="section">
       <div class="hero">
         <h1>🎤 Zona 14 — Modo Defensa / Entrevista / Exposición</h1>
-        <p>Preguntas, retos y simulación de sustentación del proyecto.</p>
+        <p>Preguntas, retos y simulación de sustentación del proyecto. Por zonas/épicas.</p>
       </div>
-      <div class="card">
-        <h2>Contenido próximamente</h2>
-        <div class="complete"><button onclick="completeLesson('zona-14')">Marcar Zona 14 como completada</button><span id="done-zona-14" class="mini muted"></span></div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>📋 Cómo defender una épica (guía general)</h2>
+          <h3>Qué debes preparar para cada épica:</h3>
+          <ol>
+            <li><strong>Modelos:</strong> Nombres de los modelos, campos clave, relaciones (1:1, 1:N, N:M)</li>
+            <li><strong>Rutas (urls.py):</strong> Rutas principales de la app</li>
+            <li><strong>Vistas (views.py):</strong> Vistas principales, transacciones, validaciones</li>
+            <li><strong>Plantillas (templates/):</strong> Plantillas principales de la app</li>
+            <li><strong>Flujo de usuario:</strong> Paso a paso de cómo un usuario usa la funcionalidad</li>
+          </ol>
+          <h3>Consejos para exponer:</h3>
+          <ul>
+            <li>Habla despacio y con claridad</li>
+            <li>Usa el código real del repo como apoyo (abre los archivos en VS Code mientras expones)</li>
+            <li>Si no sabes algo, admítelo y propón cómo buscar la respuesta</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Primer paso: Elige la épica que te toca defender</h2>
+          <p class="muted">Usa esta sección como guía para preparar tu exposición.</p>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>👤 Épica 1: Acceso, Usuarios y Clientes (Edward)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: User (nativo Django), Usuario, Cliente, Conductor</li>
+            <li>Campos clave: rol (en Usuario), OneToOneField entre User ↔ Usuario</li>
+            <li>Señales: post_save para crear perfil cliente automáticamente</li>
+            <li>Rutas: /usuarios/login/, /usuarios/registro/, /usuarios/panel/</li>
+            <li>Vistas: login, registro, panel_admin, panel_conductor, panel_sesion</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Por qué existe el modelo Usuario si ya existe User?</li>
+            <li>¿Dónde se guarda el rol del usuario?</li>
+            <li>¿Cómo se crea automáticamente el perfil Cliente cuando se registra un usuario?</li>
+            <li>¿A dónde redirige el login según cada rol?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span></li>
+            <li><span class="badge">apps/usuarios/urls.py</span></li>
+            <li><span class="badge">apps/usuarios/views.py</span></li>
+            <li><span class="badge">apps/clientes/models.py</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>📦 Épica 2: Gestión de Materiales e Inventario (Iván Tai)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: MaterialConstruccion (Material), Stock, MovimientoInventario</li>
+            <li>Campos clave: cod_material (PK de Material), cantidad_actual en Stock</li>
+            <li>Relaciones: Material ↔ Stock (1:1), Material ↔ MovimientoInventario (1:N)</li>
+            <li>Vistas: lista de materiales, agregar stock, movimientos de inventario</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Cuál es la PK de MaterialConstruccion?</li>
+            <li>¿Qué relación hay entre Material y Stock?</li>
+            <li>¿Cómo se actualiza el stock cuando se hace un pedido?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span> (MaterialConstruccion y Stock)</li>
+            <li><span class="badge">apps/inventario/models.py</span></li>
+            <li><span class="badge">apps/inventario/views.py</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>📋 Épica 3: Gestión de Pedidos (Juanes)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: Pedido (Orden), DetallePedido (DetalleOrden), Entrega</li>
+            <li>Campos clave: codigo_pedido, estado, total en Pedido</li>
+            <li>Estados del pedido: pendiente, en_ruta, entregado, cancelado</li>
+            <li>Transacciones: transaction.atomic() al agregar materiales al pedido</li>
+            <li>F() expressions: para evitar race conditions al modificar stock</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Cuáles son los estados de un pedido?</li>
+            <li>¿Cómo se calcula el subtotal de un DetallePedido?</li>
+            <li>¿Por qué se usa F() al modificar el stock?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/ordenes/models.py</span></li>
+            <li><span class="badge">apps/ordenes/views.py</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>🚚 Épica 4: Gestión de Entregas y Transporte (Michel)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: Vehiculo, Conductor, ConductorVehiculo (tabla puente N:M), Entrega</li>
+            <li>Campos clave: placa (única en Vehiculo), estado en Vehiculo</li>
+            <li>Estados del vehículo: disponible, en_ruta, mantenimiento, desactivado</li>
+            <li>Validación: No se puede desactivar un vehículo con entregas activas</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Qué campo del Vehiculo es único?</li>
+            <li>¿Qué relación hay entre Conductor y Vehiculo?</li>
+            <li>¿Por qué no se puede desactivar un vehículo con entregas activas?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span> (Vehiculo, Conductor, ConductorVehiculo)</li>
+            <li><span class="badge">apps/transporte/views.py</span></li>
+            <li><span class="badge">apps/ordenes/models.py</span> (Entrega)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>🛒 Épica 5: Gestión de Proveedores y Compra (RR)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: Proveedor, Compra, DetalleCompra</li>
+            <li>Campos clave: nit (PK de Proveedor), total_compra en Compra</li>
+            <li>Método: calcular_total() en Compra</li>
+            <li>Estados de la compra: pendiente, recibida, cancelada</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Cuál es la PK de Proveedor?</li>
+            <li>¿Cómo se calcula el total de una Compra?</li>
+            <li>¿Cuáles son los estados de una Compra?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/usuarios/models.py</span> (Proveedor)</li>
+            <li><span class="badge">apps/compras/models.py</span></li>
+            <li><span class="badge">apps/compras/views.py</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>🧾 Épica 6: Facturación y Pagos (Edward)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: Factura, Pago</li>
+            <li>Relación: Pedido ↔ Factura (1:1), Factura ↔ Pago (1:N)</li>
+            <li>Propiedades: total_pagado, saldo_pendiente en Factura</li>
+            <li>Transacciones: select_for_update() al registrar pagos para evitar race conditions</li>
+            <li>Señales: post_save en Pago para marcar Factura como pagada si saldo <= 0</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Qué relación hay entre Pedido y Factura?</li>
+            <li>¿Cómo se calcula el saldo pendiente de una Factura?</li>
+            <li>¿Por qué se usa select_for_update() al registrar un pago?</li>
+            <li>¿Cuándo se marca una Factura como pagada?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/facturacion/models.py</span></li>
+            <li><span class="badge">apps/facturacion/views.py</span></li>
+            <li><span class="badge">apps/pagos/models.py</span></li>
+            <li><span class="badge">apps/pagos/views.py</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>📈 Épica 7: Reportes e Historial (RR)</h2>
+          <h3>Qué debes saber:</h3>
+          <ul>
+            <li>Modelos: Historial, Reporte, HistorialReporte</li>
+            <li>Acciones del Historial: crear, editar, eliminar, login, logout, otro</li>
+            <li>Tipos de Reporte: inventario, ventas, compras, entregas, financiero</li>
+            <li>Archivos generados: PDF, Excel, XML</li>
+          </ul>
+          <h3>Preguntas frecuentes para la defensa:</h3>
+          <ul>
+            <li>¿Qué acciones registra el modelo Historial?</li>
+            <li>¿Qué tipos de reportes hay?</li>
+            <li>¿Para qué sirve el Historial?</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Archivos a mostrar en la exposición:</h2>
+          <ul>
+            <li><span class="badge">apps/historial/models.py</span></li>
+            <li><span class="badge">apps/reportes/models.py</span></li>
+          </ul>
+          <div class="complete"><button onclick="completeLesson('zona-14')">Marcar Zona 14 como completada</button><span id="done-zona-14" class="mini muted"></span></div>
+        </div>
       </div>
     </section>
 
@@ -1914,9 +2205,33 @@ class DetalleCompra(models.Model):
         <h1>📚 Zona 15 — Glosario Técnico del Proyecto</h1>
         <p>Definiciones claras de todos los términos técnicos usados en el proyecto.</p>
       </div>
-      <div class="card">
-        <h2>Contenido próximamente</h2>
-        <div class="complete"><button onclick="completeLesson('zona-15')">Marcar Zona 15 como completada</button><span id="done-zona-15" class="mini muted"></span></div>
+
+      <div class="lesson">
+        <div class="explain">
+          <h2>Glosario</h2>
+          <ul class="source-list">
+            <li><strong>Django:</strong> Framework web de Python para construir aplicaciones rápidas y seguras.</li>
+            <li><strong>Modelo (Django):</strong> Clase Python que representa una tabla en la base de datos.</li>
+            <li><strong>Vista (Django):</strong> Función o clase que contiene la lógica de la app y devuelve una respuesta.</li>
+            <li><strong>Plantilla (Django):</strong> Archivo HTML con placeholders para datos dinámicos.</li>
+            <li><strong>URL (Django):</strong> Ruta que mapea una URL a una vista.</li>
+            <li><strong>Migración:</strong> Archivo que aplica cambios en la estructura de la base de datos.</li>
+            <li><strong>Transacción atómica:</strong> Bloque de código que se ejecuta completamente o no se ejecuta nada (evita inconsistencias).</li>
+            <li><strong>Race condition:</strong> Error que ocurre cuando dos procesos modifican los mismos datos al mismo tiempo.</li>
+            <li><strong>F() expression:</strong> Función de Django que modifica un campo directamente en la base de datos (evita race conditions).</li>
+            <li><strong>select_for_update():</strong> Método de Django que bloquea una fila en la base de datos durante una transacción.</li>
+            <li><strong>OneToOneField:</strong> Relación uno a uno entre dos modelos.</li>
+            <li><strong>ForeignKey:</strong> Relación uno a muchos entre dos modelos.</li>
+            <li><strong>ManyToManyField:</strong> Relación muchos a muchos entre dos modelos (usa tabla puente).</li>
+            <li><strong>@property:</strong> Decorador Python que permite acceder a un método como si fuera un campo.</li>
+            <li><strong>Señal (Django):</strong> Función que se ejecuta automáticamente cuando ocurre un evento (ej: post_save al guardar un objeto).</li>
+          </ul>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio: Repasa el glosario</h2>
+          <p class="muted">Usa este glosario como referencia cuando estudias el código.</p>
+          <div class="complete"><button onclick="completeLesson('zona-15')">Marcar Zona 15 como completada</button><span id="done-zona-15" class="mini muted"></span></div>
+        </div>
       </div>
     </section>
 
