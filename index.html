@@ -1504,15 +1504,13 @@ Material = MaterialConstruccion  # Alias para compatibilidad</div>
     <section id="zona-7" class="section">
       <div class="hero">
         <h1>📋 Zona 7 — Épica 3: Pedidos</h1>
-        <p>Descubre cómo funciona Pedido, DetallePedido, transacciones, select_for_update y F expressions. Responsable histórico: Juanes</p>
+        <p>Descubre cómo funciona Pedido, DetallePedido, transacciones y F expressions — con TODO el código real de Constru-trans_01. Responsable histórico: Juanes</p>
       </div>
 
       <div class="lesson">
         <div class="explain">
-          <h2>Paso 1: Modelo Pedido (Orden)</h2>
-          <h3>Objetivo</h3>
-          <p>Conocer el modelo principal de pedidos, sus estados y campos.</p>
-          <h3>Código real del repo:</h3>
+          <h2>Paso 1: Modelo Pedido (Orden) — código REAL</h2>
+          <h3>Código REAL de apps/ordenes/models.py:</h3>
           <div class="codebox">class Pedido(models.Model):
     ESTADOS = [
         ('pendiente', 'Pendiente'),
@@ -1535,15 +1533,13 @@ Material = MaterialConstruccion  # Alias para compatibilidad</div>
 
 # Alias para compatibilidad con código anterior
 Orden = Pedido</div>
-          <h3>Archivo a revisar:</h3>
-          <ul><li><span class="badge">apps/ordenes/models.py</span></li></ul>
         </div>
         <div class="practice">
-          <h2>Ejercicio 1: Estados del Pedido</h2>
+          <h2>Ejercicio 1: PK de Pedido</h2>
           <div class="q">
-            <label><strong>¿Cuáles son los 4 estados posibles de un pedido?</strong></label>
-            <textarea id="zona7-q1" class="code-editor" placeholder="# Escribe los estados separados por comas..."></textarea>
-            <button style="margin-top:10px" onclick="checkText('zona7-q1','pendiente, en_ruta, entregado, cancelado','¡Genial!','Mira el código: ESTADOS = [...]')">Comprobar</button>
+            <label><strong>¿Cuál es la clave primaria de Pedido?</strong></label>
+            <textarea id="zona7-q1" class="code-editor" placeholder="# Escribe el campo..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona7-q1','codigo_pedido','¡Genial!','Mira el código')">Comprobar</button>
             <div id="res-zona7-q1" class="result"></div>
           </div>
         </div>
@@ -1551,10 +1547,7 @@ Orden = Pedido</div>
 
       <div class="lesson" style="margin-top:20px">
         <div class="explain">
-          <h2>Paso 2: DetallePedido y cálculo de subtotales</h2>
-          <h3>Objetivo</h3>
-          <p>Conocer cómo se relacionan los materiales con los pedidos y cómo se calculan los subtotales.</p>
-          <h3>Código real:</h3>
+          <h2>Paso 2: Modelo DetallePedido — código REAL</h2>
           <div class="codebox">class DetallePedido(models.Model):
     id_detalle_pedido = models.AutoField(primary_key=True)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='detalles')
@@ -1566,16 +1559,22 @@ Orden = Pedido</div>
     def subtotal(self):
         return self.cantidad * self.precio_unitario
 
-    # Alias para compatibilidad
-    orden = pedido
-    DetalleOrden = DetallePedido</div>
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.pedido.calcular_total()
+
+# Alias para compatibilidad
+DetalleOrden = DetallePedido</div>
         </div>
         <div class="practice">
-          <h2>Ejercicio 2: Subtotal</h2>
+          <h2>Ejercicio 2: Método save() de DetallePedido</h2>
           <div class="q">
-            <label><strong>¿Cómo se calcula el subtotal de un DetallePedido?</strong></label>
-            <textarea id="zona7-q2" class="code-editor" placeholder="# Escribe la fórmula..."></textarea>
-            <button style="margin-top:10px" onclick="checkText('zona7-q2','cantidad * precio_unitario','¡Perfecto!','Mira el @property subtotal')">Comprobar</button>
+            <label><strong>¿Qué método se llama automáticamente al guardar un DetallePedido?</strong></label>
+            <div class="options">
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona7-q2')">create()</button>
+              <button class="secondary" onclick="checkRadio(this,true,'res-zona7-q2')">save()</button>
+              <button class="secondary" onclick="checkRadio(this,false,'res-zona7-q2')">delete()</button>
+            </div>
             <div id="res-zona7-q2" class="result"></div>
           </div>
         </div>
@@ -1583,34 +1582,28 @@ Orden = Pedido</div>
 
       <div class="lesson" style="margin-top:20px">
         <div class="explain">
-          <h2>Paso 3: Transacciones y F expressions</h2>
-          <h3>Objetivo</h3>
-          <p>Aprender cómo el código usa transacciones atómicas y F() para evitar race conditions al modificar el stock.</p>
-          <h3>Código real (de views.py):</h3>
-          <div class="codebox">from django.db import transaction
-from django.db.models import F
-
-@admin_required
-def agregar_materiales(request, id):
-    orden = get_object_or_404(Orden, pk=id)
-    if request.method == "POST":
-        material = get_object_or_404(Material, pk=material_id)
-        stock_obj = Stock.objects.get(material=material)
-        
-        if stock_obj.cantidad_actual >= cantidad:
-            with transaction.atomic():
-                # Crear detalle
-                DetalleOrden.objects.create(...)
-                # Descontar stock usando F() para evitar race conditions
-                stock_obj.cantidad_actual = F('cantidad_actual') - cantidad
-                stock_obj.save()</div>
+          <h2>Paso 3: Modelo Entrega — código REAL</h2>
+          <div class="codebox">class Entrega(models.Model):
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('en_ruta', 'En Ruta'),
+        ('entregado', 'Entregado'),
+    ]
+    id_entrega = models.AutoField(primary_key=True)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='entregas')
+    conductor = models.ForeignKey('usuarios.Conductor', on_delete=models.PROTECT)
+    vehiculo = models.ForeignKey('usuarios.Vehiculo', on_delete=models.SET_NULL, null=True, blank=True)
+    fecha_salida = models.DateTimeField(null=True, blank=True)
+    fecha_entrega = models.DateTimeField(null=True, blank=True)
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+    direccion_entrega = models.CharField(max_length=200)</div>
         </div>
         <div class="practice">
-          <h2>Ejercicio 3: F() expressions</h2>
+          <h2>Ejercicio 3: F() expressions y transaction.atomic()</h2>
           <div class="q">
-            <label><strong>¿Qué función se usa para evitar race conditions al modificar el stock?</strong></label>
+            <label><strong>¿Qué función se usa para descontar stock sin race conditions?</strong></label>
             <textarea id="zona7-q3" class="code-editor" placeholder="# Escribe el nombre..."></textarea>
-            <button style="margin-top:10px" onclick="checkText('zona7-q3','F','¡Genial! F() evita race conditions.','Mira el código: F(\"cantidad_actual\")')">Comprobar</button>
+            <button style="margin-top:10px" onclick="checkText('zona7-q3','F','¡Genial!','Mira apps/ordenes/views.py')">Comprobar</button>
             <div id="res-zona7-q3" class="result"></div>
           </div>
           <div class="complete"><button onclick="completeLesson('zona-7')">Marcar Zona 7 como completada</button><span id="done-zona-7" class="mini muted"></span></div>
@@ -1890,7 +1883,7 @@ class DetalleCompra(models.Model):
     <section id="zona-13" class="section">
       <div class="hero">
         <h1>📖 Zona 13 — Cómo Leer Este Repo Sin Perderse</h1>
-        <p>Entrenamiento para leer código real, archivo por archivo.</p>
+        <p>Entrenamiento para leer código real, archivo por archivo — con fragmentos reales de Constru-trans_01.</p>
       </div>
 
       <div class="lesson">
@@ -1920,20 +1913,37 @@ class DetalleCompra(models.Model):
 
       <div class="lesson" style="margin-top:20px">
         <div class="explain">
-          <h2>Paso 2: Explorar la carpeta core/</h2>
-          <h3>Archivos clave en core/:</h3>
-          <ul>
-            <li><span class="badge">core/settings/</span>: Configuración modular (base.py, development.py, production.py)</li>
-            <li><span class="badge">core/urls.py</span>: Rutas principales del proyecto (incluye todas las apps)</li>
-            <li><span class="badge">core/routers.py</span>: Router de base de datos (decide entre SQLite local y PostgreSQL remoto)</li>
-          </ul>
+          <h2>Paso 2: Explorar core/urls.py (el "centro de comandos")</h2>
+          <h3>Código REAL de core/urls.py:</h3>
+          <div class="codebox">from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    # Apps (todas las rutas del proyecto)
+    path('usuarios/', include('apps.usuarios.urls')),
+    path('clientes/', include('apps.clientes.urls')),
+    path('inventario/', include('apps.inventario.urls')),
+    path('compras/', include('apps.compras.urls')),
+    path('ordenes/', include('apps.ordenes.urls')),
+    path('facturacion/', include('apps.facturacion.urls')),
+    path('pagos/', include('apps.pagos.urls')),
+    path('reportes/', include('apps.reportes.urls')),
+    path('historial/', include('apps.historial.urls')),
+    path('transporte/', include('apps.transporte.urls')),
+    path('', include('apps.inicio.urls')),
+]</div>
         </div>
         <div class="practice">
-          <h2>Ejercicio 2: Abre core/urls.py</h2>
+          <h2>Ejercicio 2: Rutas de todas las apps</h2>
           <div class="q">
-            <label><strong>¿Qué archivo conecta todas las apps del proyecto?</strong></label>
+            <label><strong>¿Qué archivo incluye todas las apps del proyecto?</strong></label>
             <textarea id="zona13-q1" class="code-editor" placeholder="# Escribe el nombre del archivo..."></textarea>
-            <button style="margin-top:10px" onclick="checkText('zona13-q1','core/urls.py','¡Genial!','Mira el Paso 2 de esta zona')">Comprobar</button>
+            <button style="margin-top:10px" onclick="checkText('zona13-q1','core/urls.py','¡Genial!','Mira el código de core/urls.py arriba')">Comprobar</button>
             <div id="res-zona13-q1" class="result"></div>
           </div>
         </div>
@@ -1941,33 +1951,139 @@ class DetalleCompra(models.Model):
 
       <div class="lesson" style="margin-top:20px">
         <div class="explain">
-          <h2>Paso 3: Explorar las apps en apps/</h2>
-          <h3>Estructura de una app típica (ej: apps/usuarios/):</h3>
-          <ul>
-            <li><span class="badge">models.py</span>: Modelos de la base de datos</li>
-            <li><span class="badge">views.py</span>: Vistas (logica de la app)</li>
-            <li><span class="badge">urls.py</span>: Rutas específicas de la app</li>
-            <li><span class="badge">forms.py</span>: Formularios</li>
-            <li><span class="badge">templates/</span>: Plantillas HTML</li>
-            <li><span class="badge">migrations/</span>: Migraciones de la base de datos</li>
-          </ul>
-          <h3>Orden recomendado para leer una app:</h3>
-          <ol>
-            <li>Primero: models.py (entender los datos)</li>
-            <li>Segundo: urls.py (ver las rutas)</li>
-            <li>Tercero: views.py (ver la lógica)</li>
-            <li>Cuarto: templates/ (ver la interfaz)</li>
-          </ol>
+          <h2>Paso 3: Explorar apps/usuarios/urls.py (rutas de la app usuarios)</h2>
+          <h3>Código REAL de apps/usuarios/urls.py:</h3>
+          <div class="codebox">from django.urls import path, reverse_lazy
+from . import views
+
+app_name = 'usuarios'
+
+urlpatterns = [
+    # Autenticación
+    path("login/", views.login_usuario, name="login"),
+    path("registro/", views.registro, name="registro"),
+    path("panel/", views.panel, name="panel"),
+    path("logout/", views.cerrar_sesion, name="logout"),
+
+    # Admin
+    path("usuarios/", views.lista_usuarios, name="lista_usuarios"),
+    path("usuarios/crear/", views.crear_usuario, name="crear_usuario"),
+    path("usuarios/eliminar/<int:id>/", views.eliminar_usuario, name="eliminar_usuario"),
+
+    # Conductor
+    path("panel-conductor/", views.panel_conductor, name="panel_conductor"),
+    path("mis-entregas/", views.mis_entregas, name="mis_entregas"),
+]</div>
         </div>
         <div class="practice">
-          <h2>Ejercicio 3: Lee una app</h2>
-          <div class="vs-code-box">
-            <h4>👨‍💻 Con apps/usuarios:</h4>
-            <ol>
-              <li>Abre apps/usuarios/models.py y lee los modelos Usuario, Conductor, MaterialConstruccion, Stock</li>
-              <li>Abre apps/usuarios/urls.py y ve las rutas</li>
-              <li>Abre apps/usuarios/views.py y lee alguna vista (ej: login, registro)</li>
-            </ol>
+          <h2>Ejercicio 3: Rutas de la app usuarios</h2>
+          <div class="q">
+            <label><strong>¿Cuál es la ruta para el login de usuarios?</strong></label>
+            <textarea id="zona13-q2" class="code-editor" placeholder="# Escribe la ruta..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona13-q2','/usuarios/login/','¡Genial!','Mira apps/usuarios/urls.py arriba')">Comprobar</button>
+            <div id="res-zona13-q2" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 4: Explorar apps/facturacion/views.py (registrar_pago)</h2>
+          <h3>Código REAL de apps/facturacion/views.py (función registrar_pago):</h3>
+          <div class="codebox">from django.db import transaction
+from django.db.models import F
+from .models import Factura
+from apps.pagos.models import Pago
+
+@login_required
+@require_POST
+def registrar_pago(request):
+    factura_id = request.POST.get('factura_id')
+    monto_str = request.POST.get('monto', '0')
+
+    try:
+        monto = Decimal(monto_str)
+    except:
+        return JsonResponse({'error': 'Monto inválido'}, status=400)
+
+    try:
+        with transaction.atomic():
+            # Bloqueamos la factura para evitar race conditions
+            factura = Factura.objects.select_for_update().get(id_factura=factura_id)
+            
+            if monto > factura.saldo_pendiente:
+                return JsonResponse({'error': f'El monto excede el saldo pendiente'}, status=400)
+                
+            # Registrar pago
+            Pago.objects.create(factura=factura, monto=monto, ...)
+            
+            # Actualizar estado si saldo <= 0
+            if factura.saldo_pendiente <= 0:
+                factura.estado = 'pagada'
+                factura.save()
+                
+        return JsonResponse({'status': 'ok', ...})
+    except Factura.DoesNotExist:
+        return JsonResponse({'error': 'Factura no encontrada'}, status=404)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 4: select_for_update()</h2>
+          <div class="q">
+            <label><strong>¿Qué método bloquea una factura para evitar pagos duplicados concurrentes?</strong></label>
+            <textarea id="zona13-q3" class="code-editor" placeholder="# Escribe el nombre del método..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona13-q3','select_for_update','¡Genial!','Mira apps/facturacion/views.py arriba')">Comprobar</button>
+            <div id="res-zona13-q3" class="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson" style="margin-top:20px">
+        <div class="explain">
+          <h2>Paso 5: Explorar apps/ordenes/views.py (agregar_materiales)</h2>
+          <h3>Código REAL de apps/ordenes/views.py (función agregar_materiales):</h3>
+          <div class="codebox">from django.db import transaction
+from django.db.models import F
+from .models import Orden, DetalleOrden
+from apps.usuarios.models import Stock, Material
+from apps.inventario.models import MovimientoInventario
+
+@admin_required
+def agregar_materiales(request, id):
+    orden = get_object_or_404(Orden, pk=id)
+
+    if request.method == "POST":
+        material_id = request.POST.get("material")
+        cantidad = float(request.POST.get("cantidad", 0))
+        
+        material = get_object_or_404(Material, pk=material_id)
+        stock_obj = Stock.objects.get(material=material)
+
+        if stock_obj.cantidad_actual >= cantidad:
+            with transaction.atomic():
+                # Crear o actualizar detalle
+                detalle, created = DetalleOrden.objects.get_or_create(
+                    pedido=orden, material=material,
+                    defaults={'cantidad': cantidad, 'precio_unitario': material.precio}
+                )
+                
+                # Descontar stock con F()
+                stock_obj.cantidad_actual = F('cantidad_actual') - cantidad
+                stock_obj.save()
+                
+                # Registrar movimiento de inventario
+                MovimientoInventario.objects.create(...)
+                
+                orden.calcular_total()
+                
+    return render(request, "ordenes/agregar_materiales.html", ...)</div>
+        </div>
+        <div class="practice">
+          <h2>Ejercicio 5: transaction.atomic()</h2>
+          <div class="q">
+            <label><strong>¿Qué bloque se usa para que todo o nada se ejecute al agregar materiales?</strong></label>
+            <textarea id="zona13-q4" class="code-editor" placeholder="# Escribe el bloque..."></textarea>
+            <button style="margin-top:10px" onclick="checkText('zona13-q4','transaction.atomic','¡Genial!','Mira apps/ordenes/views.py arriba')">Comprobar</button>
+            <div id="res-zona13-q4" class="result"></div>
           </div>
           <div class="complete"><button onclick="completeLesson('zona-13')">Marcar Zona 13 como completada</button><span id="done-zona-13" class="mini muted"></span></div>
         </div>

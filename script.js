@@ -451,19 +451,107 @@ const quizFeedback = {
   },
   'zona13-q1': {
     section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
-    subapartado: 'Ejercicio 2: Abre core/urls.py',
+    subapartado: 'Ejercicio 2: core/urls.py',
     fragmento: 'core/urls.py',
     explicacion: 'El archivo que conecta todas las apps del proyecto es core/urls.py.',
-    pista: 'Mira el Paso 2 de esta zona',
-    codigo: 'core/urls.py'
+    pista: 'Mira el código de core/urls.py',
+    codigo: "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('usuarios/', include('apps.usuarios.urls')),\n    ...\n]"
   },
   'res-zona13-q1': {
     section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
-    subapartado: 'Ejercicio 2: Abre core/urls.py',
+    subapartado: 'Ejercicio 2: core/urls.py',
     fragmento: 'core/urls.py',
     explicacion: 'El archivo que conecta todas las apps del proyecto es core/urls.py.',
-    pista: 'Mira el Paso 2 de esta zona',
-    codigo: 'core/urls.py'
+    pista: 'Mira el código de core/urls.py',
+    codigo: "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('usuarios/', include('apps.usuarios.urls')),\n    ...\n]"
+  },
+  'zona13-q2': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 3: Rutas de la app usuarios',
+    fragmento: '/usuarios/login/',
+    explicacion: 'La ruta para el login de usuarios es /usuarios/login/.',
+    pista: 'Mira apps/usuarios/urls.py',
+    codigo: 'path("login/", views.login_usuario, name="login")'
+  },
+  'res-zona13-q2': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 3: Rutas de la app usuarios',
+    fragmento: '/usuarios/login/',
+    explicacion: 'La ruta para el login de usuarios es /usuarios/login/.',
+    pista: 'Mira apps/usuarios/urls.py',
+    codigo: 'path("login/", views.login_usuario, name="login")'
+  },
+  'zona13-q3': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 4: select_for_update()',
+    fragmento: 'select_for_update',
+    explicacion: 'El método que bloquea una factura para evitar race conditions es select_for_update().',
+    pista: 'Mira apps/facturacion/views.py',
+    codigo: 'factura = Factura.objects.select_for_update().get(id_factura=factura_id)'
+  },
+  'res-zona13-q3': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 4: select_for_update()',
+    fragmento: 'select_for_update',
+    explicacion: 'El método que bloquea una factura para evitar race conditions es select_for_update().',
+    pista: 'Mira apps/facturacion/views.py',
+    codigo: 'factura = Factura.objects.select_for_update().get(id_factura=factura_id)'
+  },
+  'zona13-q4': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 5: transaction.atomic()',
+    fragmento: 'transaction.atomic',
+    explicacion: 'El bloque que se usa para que todo o nada se ejecute es transaction.atomic().',
+    pista: 'Mira apps/ordenes/views.py',
+    codigo: 'with transaction.atomic():\n    # Tu código aquí'
+  },
+  'res-zona13-q4': {
+    section: 'Zona 13 — Cómo Leer Este Repo Sin Perderse',
+    subapartado: 'Ejercicio 5: transaction.atomic()',
+    fragmento: 'transaction.atomic',
+    explicacion: 'El bloque que se usa para que todo o nada se ejecute es transaction.atomic().',
+    pista: 'Mira apps/ordenes/views.py',
+    codigo: 'with transaction.atomic():\n    # Tu código aquí'
+  },
+  'zona7-q1': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 1: PK de Pedido',
+    fragmento: 'codigo_pedido',
+    explicacion: 'La clave primaria de Pedido es codigo_pedido.',
+    pista: 'Mira apps/ordenes/models.py',
+    codigo: 'codigo_pedido = models.AutoField(primary_key=True)'
+  },
+  'res-zona7-q1': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 1: PK de Pedido',
+    fragmento: 'codigo_pedido',
+    explicacion: 'La clave primaria de Pedido es codigo_pedido.',
+    pista: 'Mira apps/ordenes/models.py',
+    codigo: 'codigo_pedido = models.AutoField(primary_key=True)'
+  },
+  'res-zona7-q2': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 2: Método save() de DetallePedido',
+    fragmento: 'save()',
+    explicacion: 'El método que se llama automáticamente al guardar un DetallePedido es save().',
+    pista: 'Mira apps/ordenes/models.py',
+    codigo: 'def save(self, *args, **kwargs):\n    super().save(*args, **kwargs)\n    self.pedido.calcular_total()'
+  },
+  'zona7-q3': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 3: F() expressions',
+    fragmento: 'F',
+    explicacion: 'La función que se usa para descontar stock sin race conditions es F().',
+    pista: 'Mira apps/ordenes/views.py',
+    codigo: 'stock_obj.cantidad_actual = F(\'cantidad_actual\') - cantidad'
+  },
+  'res-zona7-q3': {
+    section: 'Zona 7 — Épica 3: Pedidos',
+    subapartado: 'Ejercicio 3: F() expressions',
+    fragmento: 'F',
+    explicacion: 'La función que se usa para descontar stock sin race conditions es F().',
+    pista: 'Mira apps/ordenes/views.py',
+    codigo: 'stock_obj.cantidad_actual = F(\'cantidad_actual\') - cantidad'
   }
 };
 
